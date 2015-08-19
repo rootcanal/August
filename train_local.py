@@ -43,11 +43,6 @@ def make_eq(q,a,equations):
     answs = a #open(a).readlines()
 
     for k in range(len(wps)):
-        eqs = get_k_eqs(equations[k])
-        answers = [x[1] for x in eqs if x[0]==1]
-        if answers == []: continue
-        answers = list(set(answers))
-
 
         #First preprocessing, tokenize slightly
         problem = wps[k]#.lower()
@@ -61,11 +56,19 @@ def make_eq(q,a,equations):
         print(k)
         print(problem)
 
-        #make story
         story = nlp.parse(problem)
-        ####THIS IS JUST TO GET DATA TO SIENA
+        ###THIS IS JUST TO GET DATA TO SIENA
         pickle.dump(story, open("s_data/"+str(k)+".pickle",'wb'))
         continue
+
+        eqs = get_k_eqs(equations[k])
+        answers = [x[1] for x in eqs if x[0]==1]
+        if answers == []: continue
+        answers = list(set(answers))
+
+
+        #make story
+        story = nlp.parse(problem)
         sets = makesets.makesets(story['sentences'])
         i = 0
 

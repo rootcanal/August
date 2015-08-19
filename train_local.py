@@ -63,6 +63,9 @@ def make_eq(q,a,equations):
 
         #make story
         story = nlp.parse(problem)
+        ####THIS IS JUST TO GET DATA TO SIENA
+        pickle.dump(story, open("s_data/"+str(k)+".pickle",'wb'))
+        continue
         sets = makesets.makesets(story['sentences'])
         i = 0
 

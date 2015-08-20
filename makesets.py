@@ -296,58 +296,40 @@ def combine(a,b,op):
     c.subtypes = [a.entity,b.entity]
     return c
 
+def assert_question_entity(story, sets, good):
+    xset = [x for x in sets if x[1].num=='x']
+    if xset and good == 0:
+        xset = xset[0]
+        if xset[1].entity=="NONE":
+            #is there a NNS near to the question?
+            words = story[-1]['words']
+            idx = [x[0].lower() for x in words].index('how')
+            prev = 1
+            if idx>=0:
+                words = words[idx:idx+4]
+                nns = [x for x in words if x[1]['PartOfSpeech']=='NNS']
+                if nns:
+                    xset[1].entity = nns[0][1]["Lemma"]
+                    xset[1].surface = nns[0][0]
+                    prev = 0
 
+            if prev:
+                prev = [x for x in sets if x[0]<xset[0]]
+                prev = prev[-1][1]
+                xset[1].entity = prev.entity
+                xset[1].surface = prev.surface
 
-def entityextract(story):
-    sets = []
-    #this function makes the preliminary sets, finding the quantified entities. 
-    for j,s in enumerate(story):
-        deps = s['indexeddependencies']
-        words = s['words']
-        surfaces = [x[0] for x in words]
-        
-        nums = [(x[1],x[2]) for x in deps if x[0]=='num' or x[0]=='number' or x[0]=='det']
-        nums.extend([(x[2],x[1]) for x in deps if x[0]=="prep_of" and (x[1].split("-")[0].isdigit() or x[1].rsplit("-",maxsplit=1)[0] in ['half','third','quarter'])])
-        for w,n in nums:
-            n,nidx = n.split("-")
-            nidx = int(nidx)-1
-            w,widx = w.rsplit("-",maxsplit=1)
-            widx = int(widx)-1
-            #print(w,n)
-            if w == "$":
-                lemma = 'dollar'
-                sets.append(((j*1000)+nidx,aset(n,lemma,w,j*1000+widx)))
+        quantifiedents = [x[1].entity for x in sets if floatcheck(x[1].num) or x[1].num=='dozen']
+        if quantifiedents:
+            if xset[1].entity not in quantifiedents:
+                
+                #change, make most prev entity rather than whatever ent
+                #unless its like money or something!?
+                if xset[1].entity not in ['dozen','money','$','money','cent','penny', 'nickel', 'dime', 'quarter', 'half-dollar', 'dollar', 'five-dollar bills','second', 'minute', 'hour', 'day', 'week', 'month', 'year','inches', 'feet', 'yards']:
+                    xset[1].entity = quantifiedents[-1]
+    return sets
 
-
-
-            elif words[widx][1]["PartOfSpeech"] in ["NN","NNS"]:
-                if n=='each' and w=='cost':
-                    #let this slip through
-                    continue
-                lemma = words[widx][1]["Lemma"]
-                sets.append(((j*1000)+nidx,aset(n,lemma,w,j*1000+widx)))
-                if [x for x in deps if x[0]=='prep_of' and x[1]==n and x[2]==w]:
-                    sets[-1][1].subset =1
-    
-        #deal with each where parse fails AND IS BAD:
-        if 'each' in surfaces:
-            eachi = surfaces.index('each')
-            if (j*1000)+eachi in [x[0] for x in sets]:
-                continue
-            setmatch = [x for x in words[eachi:eachi+4] if x[1]['Lemma'] in [y[1].entity for y in sets]]
-            if setmatch and len([x for x in words[eachi:eachi+4] if x[0] in [',','and','but']])==0:
-                nextword = setmatch[0]
-            else:
-                setmatch = [x for x in words if x[1]['Lemma'] in [y[1].entity for y in sets]]
-                if setmatch:
-                    nextword = setmatch[0]
-                else:
-                    nns = [x for x in words if x[1]["PartOfSpeech"]=="NNS"]
-                    if nns:
-                        nextword = nns[-1]
-            lemma = nextword[1]["Lemma"]
-            sets.append(((j*1000)+eachi,aset('each',lemma,nextword[0],j*1000+eachi+1)))
-
+def question_entity(story, sets):
     #get question entity
     ents = [x[1].entity for x in sets]
     q = story[-1]
@@ -371,7 +353,6 @@ def entityextract(story):
                 sets.append((j*1000+tidx,aset('x','dollar',"dollar",j*1000+tidx)))
                 good = 1
                 targets = []
-
 
         if len(targets)==1:
             t,tidx = targets[0].rsplit("-",maxsplit=1)
@@ -419,223 +400,214 @@ def entityextract(story):
                 sets.append((j*1000+howidx+1,aset('x','LENGTH','LENGTH',j*1000+howidx+1)))
                 good = 1
 
+    return (sets, good)
 
 
-            
+def extract_quantify(story):
+    sets = []
+
+    #this function makes the preliminary sets, finding the quantified entities. 
     for j,s in enumerate(story):
         deps = s['indexeddependencies']
         words = s['words']
-        othernums = [((j*1000+i), x[0]) for i,x in enumerate(words) if x[1]["PartOfSpeech"]=="CD"]
-        othernums = [x for x in othernums if x[0] not in [y[0] for y in sets]]
-        if othernums:
-            for idx,n in othernums:
-                prev=1
-                #this is a hack To fix the "and" bug
-                if 'and' in [x[0] for x in words[idx%1000:idx%1000+7]]:
-                    #use next jawn
-                    nextjawn = [x for x in sets if x[0]>idx and x[0]<(((idx//1000)+1)*1000)]
-                    if nextjawn:
-                        nextjawn = nextjawn[0][1]
-                        sets.append((idx,aset(n,nextjawn.entity,nextjawn.surface,j*1000+idx)))
-                        prev=0
-                if prev==1:
-                    prevjawn = [x for x in sets if x[0]<idx]
-                    if prevjawn:
-                        #prev quantified jawns:
-                        pqjawns = [x for x in prevjawn if floatcheck(x[1].num)]
-                        if pqjawns:
-                            prevjawn = pqjawns[-1][1]
-                        else:
-                            prevjawn = prevjawn[-1][1]
-                        sets.append((idx,aset(n,prevjawn.entity,prevjawn.surface,j*1000+idx)))
-                    else:
-                        #find the NNSess
-                        #print(idx,n)
-                        nns = []
-                        for j,s in enumerate(story):
-                            nns.extend([(j*1000+i,w) for i,w in enumerate(s['words']) if w[1]["PartOfSpeech"] == "NNS"])
-                        #print(nns)
-                        if nns:
-                            prev = [x[1] for x in nns if x[0]<idx]
-                            if prev:
-                                prevjawn = prev[-1]
-                                sets.append((idx,aset(n,prevjawn[1]["Lemma"],prevjawn[0],j*1000+idx)))
-                            else:
-                                prevjawn = nns[0][1]
-                                sets.append((idx,aset(n,prevjawn[1]["Lemma"],prevjawn[0],j*1000+idx)))
+
+        # nums is a list of potential entities
+        nums = [(x[1],x[2]) for x in deps if x[0]=='num' or x[0]=='number' or x[0]=='det']
+        nums.extend([(x[2],x[1]) for x in deps if x[0]=="prep_of" and (x[1].split("-")[0].isdigit() or x[1].rsplit("-",maxsplit=1)[0] in ['half','third','quarter'])])
+        # w = word, n = number. Take each and split it out
+        for w,n in nums:
+            n,nidx = n.split("-")
+            nidx = int(nidx)-1
+            w,widx = w.rsplit("-",maxsplit=1)
+            widx = int(widx)-1
+            #print(w,n)
+
+            # dealing with dollars
+            if w == "$":
+                lemma = 'dollar' #standardized representation of collection of forms of word
+                sets.append(((j*1000)+nidx,aset(n,lemma,w,j*1000+widx)))
 
 
-    
-    xset = [x for x in sets if x[1].num=='x']
-    if xset and good == 0:
-        xset = xset[0]
-        if xset[1].entity=="NONE":
-            #is there a NNS near to the question?
-            words = story[-1]['words']
-            idx = [x[0].lower() for x in words].index('how')
-            prev = 1
-            if idx>=0:
-                words = words[idx:idx+4]
-                nns = [x for x in words if x[1]['PartOfSpeech']=='NNS']
-                if nns:
-                    xset[1].entity = nns[0][1]["Lemma"]
-                    xset[1].surface = nns[0][0]
-                    prev = 0
 
-            if prev:
-                prev = [x for x in sets if x[0]<xset[0]]
-                prev = prev[-1][1]
-                xset[1].entity = prev.entity
-                xset[1].surface = prev.surface
+            elif words[widx][1]["PartOfSpeech"] in ["NN","NNS"]:
+                if n=='each' and w=='cost':
+                    #let this slip through
+                    continue
+                lemma = words[widx][1]["Lemma"]
+                sets.append(((j*1000)+nidx,aset(n,lemma,w,j*1000+widx)))
+                if [x for x in deps if x[0]=='prep_of' and x[1]==n and x[2]==w]:
+                    sets[-1][1].subset =1
 
-        quantifiedents = [x[1].entity for x in sets if floatcheck(x[1].num) or x[1].num=='dozen']
-        if quantifiedents:
-            if xset[1].entity not in quantifiedents:
-                
-                #change, make most prev entity rather than whatever ent
-                #unless its like money or something!?
-                if xset[1].entity not in ['dozen','money','$','money','cent','penny', 'nickel', 'dime', 'quarter', 'half-dollar', 'dollar', 'five-dollar bills','second', 'minute', 'hour', 'day', 'week', 'month', 'year','inches', 'feet', 'yards']:
-                    xset[1].entity = quantifiedents[-1]
+        sets = bad_parse_each(sets, words, j)
 
-    sets = sorted(sets)
+
     return sets
-    
+
+
+def bad_parse_each(sets, words, j):
+    surfaces = [x[0] for x in words]
+
+    #deal with each where parse fails AND IS BAD:
+    if 'each' in surfaces:
+        eachi = surfaces.index('each')
+        if (j*1000)+eachi in [x[0] for x in sets]:
+            return sets
+        setmatch = [x for x in words[eachi:eachi+4] if x[1]['Lemma'] in [y[1].entity for y in sets]]
+        if setmatch and len([x for x in words[eachi:eachi+4] if x[0] in [',','and','but']])==0:
+            nextword = setmatch[0]
+        else:
+            setmatch = [x for x in words if x[1]['Lemma'] in [y[1].entity for y in sets]]
+            if setmatch:
+                nextword = setmatch[0]
+            else:
+                nns = [x for x in words if x[1]["PartOfSpeech"]=="NNS"]
+                if nns:
+                    nextword = nns[-1]
+        lemma = nextword[1]["Lemma"]
+        sets.append(((j*1000)+eachi,aset('each',lemma,nextword[0],j*1000+eachi+1)))
+
+    return sets
 
 def distance(a,b,story):
     pass
-    
+
+def containers_dozens(sets, deps, thissentsets, j, s):
+    #deal with dozens
+    dozenents = [x for x in thissentsets if 'dozen' in x[1].num]
+    thisdozen = [x for x in thissentsets if 'dozen' in x[1].entity]
+    if dozenents:
+        for x in dozenents:
+            if thisdozen:
+                thisdozen[0][1].contains = x[1].entity
+                if thisdozen[0][1].num != 'x' and not floatcheck(thisdozen[0][1].num):
+                    thisdozen[0][1].num = '1'
+            else:
+                dozent = aset('1','dozen','dozen',j*1000+(x[0]-1))
+                dozent.contains = x[1].entity
+                sets.append((x[0]-1,dozent))
+                
+            x[1].container = 'dozen'
+            x[1].num = '12'
+            
+
+
+    else:
+        if thisdozen:
+            dozdeps = [x[2].split('-') for x in deps if 'dozen' in x[1] and 'many' not in x[0]]
+            if dozdeps:
+                #print(dozdeps)
+                wrds = [s['words'][int(x[1])-1] for x in dozdeps]
+                wrds = [x for x in wrds if x[1]['PartOfSpeech'] in ['NN','NNS']]
+                if wrds:
+                    wrd = wrds[0]
+                    lem = wrd[1]['Lemma']
+                    surf = wrd[0]
+                    dozent = aset('12',lem,surf,j*1000+thisdozen[0][0]+1)
+                    thisdozen[0][1].contains = lem
+                    dozent.container = 'dozen'
+                    sets.append((thisdozen[0][0]+1,dozent))
+    return sets
+
+def containers_each(sets, deps, thissentsets, j, s):
+    #deal with each
+    thiseach = [x for x in thissentsets if x[1].num in ['each','a','an','the','every','per','one','1']]
+    if len(thiseach)>0:
+        thisothers = [x for x in thissentsets if x not in thiseach]
+        if thisothers:
+            for eidx,e in thiseach:
+                #which is closer: next ent or prev?
+                if e.num in ['a','an','per']:
+                    prev = [x for x in thisothers if x[0]<eidx and x[0]>eidx-5]
+                    if prev:
+                        target=prev[-1]
+                        target[1].container = e.entity
+                        e.contains = target[1].entity
+                else:
+                    eachdeps = [x[2] for x in deps if e.surface in x[1]]
+                    eachdeps += [x[1] for x in deps if e.surface in x[2]]
+                    meachdeps = [s['words'][int(x.split('-')[-1])-1][1]['Lemma'] for x in eachdeps]
+                    #e.details()
+                    #print(eachdeps)
+                    eachdeps = [y for y in sets if floatcheck(y[1].num) and y[1].entity in meachdeps and y[1].surface + "-"+str(y[1].widx) in eachdeps]
+                    #print(eachdeps,eidx)
+                    if eachdeps:
+                        try:
+                            each0 = sorted([(abs(y[0]-eidx),y[1]) for y in eachdeps],reverse=True)[0]
+                        except:
+                            each0 = eachdeps[0]
+                        each0[1].container = e.entity
+                        e.contains = each0[1].entity
+                    else:
+                        prev = [x for x in thisothers if x[0]<eidx]
+                        nexxt = [x for x in thisothers if x[0]>eidx]
+                        if not nexxt:
+                            target = prev[-1]
+                        else:
+                            #really should check distances, but for now lets not
+                            target = nexxt[0]
+                        target[1].container = e.entity
+                        e.contains = target[1].entity
+    return sets
+
+def articulate(sets, deps, thissentsets, j, s):
+    for e in thissentsets:
+
+        #get verbs, adj, location
+        esurface = e[1].surface+'-'+str(e[1].widx)
+        #print(esurface)
+        vbs = [x for x in deps if x[2]==esurface and x[0]=='dobj']
+        if not vbs:
+            numsurfaces = [x for x in deps if e[1].num+'-' in x[2] and x[0]=='dobj']
+        if vbs:
+            e[1].verbs = ' '.join([x[1].split('-')[0] for x in vbs])
+            e[1].role = 'do'
+        subj = [x for x in deps if x[2]==esurface and x[0]=='nsubj']
+        if subj:
+            e[1].role = 'subj'
+
+
+        adjs = [x for x in deps if x[1]==esurface and x[0]=='amod']
+        if adjs:
+            e[1].adjs = ' '.join([x[2].split('-')[0] for x in adjs])
+
+        # location
+        elocs = [x[2].split("-")[0] for x in deps if x[0] in ['prep_in','prep_on','prep_at'] and x[1] == esurface]
+        if elocs:
+            e[1].location = ' '.join(elocs)
+
+        if e[1].container:
+            continue
+
+
+        # container is nsubj
+        if vbs:
+            for y in vbs:
+                verb = y[1]
+                #find subj, this is container
+                vsubj = [x for x in deps if x[1]==verb and x[0] in ['nsubj','nsubjpass']]
+                if vsubj:
+                    e[1].container = ' '.join([x[2].split('-')[0] for x in vsubj])
+        else:
+            possible_containers = [x[1].container for x in sets if x[1].container is not None]
+            possible_containers = [x for x in possible_containers if x.lower() in [y[0].lower for y in s['words']]]
+            if possible_containers:
+                e[1].container = ' '.join(possible_containers)
+        if not e[1].verbs:
+            vbs = [x[1]["Lemma"] for x in s['words'] if 'VB' in x[1]['PartOfSpeech']]
+            vbs2 = [x for x in vbs if x not in ['do','be','have','need']]
+            if vbs2:
+                e[1].verbs = ' '.join(vbs2)
+            else:
+                e[1].verbs = ' '.join(vbs)
+    return sets
 
 def containers(sets,story):
     for j,s in enumerate(story):
         deps = s['indexeddependencies']
         thissentsets = [x for x in sets if x[0]//1000 == j]
-
-        #deal with dozens
-        dozenents = [x for x in thissentsets if 'dozen' in x[1].num]
-        thisdozen = [x for x in thissentsets if 'dozen' in x[1].entity]
-        if dozenents:
-            for x in dozenents:
-                if thisdozen:
-                    thisdozen[0][1].contains = x[1].entity
-                    if thisdozen[0][1].num != 'x' and not floatcheck(thisdozen[0][1].num):
-                        thisdozen[0][1].num = '1'
-                else:
-                    dozent = aset('1','dozen','dozen',j*1000+(x[0]-1))
-                    dozent.contains = x[1].entity
-                    sets.append((x[0]-1,dozent))
-                    
-                x[1].container = 'dozen'
-                x[1].num = '12'
-                
-
-
-        else:
-            if thisdozen:
-                dozdeps = [x[2].split('-') for x in deps if 'dozen' in x[1] and 'many' not in x[0]]
-                if dozdeps:
-                    #print(dozdeps)
-                    wrds = [s['words'][int(x[1])-1] for x in dozdeps]
-                    wrds = [x for x in wrds if x[1]['PartOfSpeech'] in ['NN','NNS']]
-                    if wrds:
-                        wrd = wrds[0]
-                        lem = wrd[1]['Lemma']
-                        surf = wrd[0]
-                        dozent = aset('12',lem,surf,j*1000+thisdozen[0][0]+1)
-                        thisdozen[0][1].contains = lem
-                        dozent.container = 'dozen'
-                        sets.append((thisdozen[0][0]+1,dozent))
-
-        #deal with each
-        thiseach = [x for x in thissentsets if x[1].num in ['each','a','an','the','every','per','one','1']]
-        if len(thiseach)>0:
-            thisothers = [x for x in thissentsets if x not in thiseach]
-            if thisothers:
-                for eidx,e in thiseach:
-                    #which is closer: next ent or prev?
-                    if e.num in ['a','an','per']:
-                        prev = [x for x in thisothers if x[0]<eidx and x[0]>eidx-5]
-                        if prev:
-                            target=prev[-1]
-                            target[1].container = e.entity
-                            e.contains = target[1].entity
-                    else:
-                        eachdeps = [x[2] for x in deps if e.surface in x[1]]
-                        eachdeps += [x[1] for x in deps if e.surface in x[2]]
-                        meachdeps = [s['words'][int(x.split('-')[-1])-1][1]['Lemma'] for x in eachdeps]
-                        #e.details()
-                        #print(eachdeps)
-                        eachdeps = [y for y in sets if floatcheck(y[1].num) and y[1].entity in meachdeps and y[1].surface + "-"+str(y[1].widx) in eachdeps]
-                        #print(eachdeps,eidx)
-                        if eachdeps:
-                            try:
-                                each0 = sorted([(abs(y[0]-eidx),y[1]) for y in eachdeps],reverse=True)[0]
-                            except:
-                                each0 = eachdeps[0]
-                            each0[1].container = e.entity
-                            e.contains = each0[1].entity
-                        else:
-                            prev = [x for x in thisothers if x[0]<eidx]
-                            nexxt = [x for x in thisothers if x[0]>eidx]
-                            if not nexxt:
-                                target = prev[-1]
-                            else:
-                                #really should check distances, but for now lets not
-                                target = nexxt[0]
-                            target[1].container = e.entity
-                            e.contains = target[1].entity
-                        
-
-        for e in thissentsets:
-
-            #get verbs, adj, location
-            esurface = e[1].surface+'-'+str(e[1].widx)
-            #print(esurface)
-            vbs = [x for x in deps if x[2]==esurface and x[0]=='dobj']
-            if not vbs:
-                numsurfaces = [x for x in deps if e[1].num+'-' in x[2] and x[0]=='dobj']
-            if vbs:
-                e[1].verbs = ' '.join([x[1].split('-')[0] for x in vbs])
-                e[1].role = 'do'
-            subj = [x for x in deps if x[2]==esurface and x[0]=='nsubj']
-            if subj:
-                e[1].role = 'subj'
-
-
-            adjs = [x for x in deps if x[1]==esurface and x[0]=='amod']
-            if adjs:
-                e[1].adjs = ' '.join([x[2].split('-')[0] for x in adjs])
-
-            # location
-            elocs = [x[2].split("-")[0] for x in deps if x[0] in ['prep_in','prep_on','prep_at'] and x[1] == esurface]
-            if elocs:
-                e[1].location = ' '.join(elocs)
-
-            if e[1].container:
-                continue
-
-
-            # container is nsubj
-            if vbs:
-                for y in vbs:
-                    verb = y[1]
-                    #find subj, this is container
-                    vsubj = [x for x in deps if x[1]==verb and x[0] in ['nsubj','nsubjpass']]
-                    if vsubj:
-                        e[1].container = ' '.join([x[2].split('-')[0] for x in vsubj])
-            else:
-                possible_containers = [x[1].container for x in sets if x[1].container is not None]
-                possible_containers = [x for x in possible_containers if x.lower() in [y[0].lower for y in s['words']]]
-                if possible_containers:
-                    e[1].container = ' '.join(possible_containers)
-            if not e[1].verbs:
-                vbs = [x[1]["Lemma"] for x in s['words'] if 'VB' in x[1]['PartOfSpeech']]
-                vbs2 = [x for x in vbs if x not in ['do','be','have','need']]
-                if vbs2:
-                    e[1].verbs = ' '.join(vbs2)
-                else:
-                    e[1].verbs = ' '.join(vbs)
-                
-                
+        sets = containers_dozens(sets, deps, thissentsets, j, s)
+        sets = containers_each(sets, deps, thissentsets, j, s)
+        sets = articulate(sets, deps, thissentsets, j, s)
 
     return sets
 
@@ -711,13 +683,50 @@ def fix_each(sets):
     return sets
 
         
-def circumscription(sets,story):
-    setssofar = []
+def circumscription(story, sets):
     for j,s in enumerate(story):
         deps = s['indexeddependencies']
         words = s['words']
-        setssofar.extend([x for x in sets if x[0]//1000 == j])
-        thissentnums = [(i,x) for i,x in enumerate(words) if x[1]["PartOfSpeech"]=='CD']
+        othernums = [((j*1000+i), x[0]) for i,x in enumerate(words) if x[1]["PartOfSpeech"]=="CD"]
+        othernums = [x for x in othernums if x[0] not in [y[0] for y in sets]]
+        if othernums:
+            for idx,n in othernums:
+                prev=1
+                #this is a hack To fix the "and" bug
+                if 'and' in [x[0] for x in words[idx%1000:idx%1000+7]]:
+                    #use next jawn
+                    nextjawn = [x for x in sets if x[0]>idx and x[0]<(((idx//1000)+1)*1000)]
+                    if nextjawn:
+                        nextjawn = nextjawn[0][1]
+                        sets.append((idx,aset(n,nextjawn.entity,nextjawn.surface,j*1000+idx)))
+                        prev=0
+                if prev==1:
+                    prevjawn = [x for x in sets if x[0]<idx]
+                    if prevjawn:
+                        #prev quantified jawns:
+                        pqjawns = [x for x in prevjawn if floatcheck(x[1].num)]
+                        if pqjawns:
+                            prevjawn = pqjawns[-1][1]
+                        else:
+                            prevjawn = prevjawn[-1][1]
+                        sets.append((idx,aset(n,prevjawn.entity,prevjawn.surface,j*1000+idx)))
+                    else:
+                        #find the NNSess
+                        #print(idx,n)
+                        nns = []
+                        for j,s in enumerate(story):
+                            nns.extend([(j*1000+i,w) for i,w in enumerate(s['words']) if w[1]["PartOfSpeech"] == "NNS"])
+                        #print(nns)
+                        if nns:
+                            prev = [x[1] for x in nns if x[0]<idx]
+                            if prev:
+                                prevjawn = prev[-1]
+                                sets.append((idx,aset(n,prevjawn[1]["Lemma"],prevjawn[0],j*1000+idx)))
+                            else:
+                                prevjawn = nns[0][1]
+                                sets.append((idx,aset(n,prevjawn[1]["Lemma"],prevjawn[0],j*1000+idx)))
+    return sets
+
 
 def add_bare_sets(sets,story):
     quantifiedents = [x[1].entity for x in sets if floatcheck(x[1].num) or x[1].num in ['dozen','half']]
@@ -873,9 +882,13 @@ def prune(sets):
 
 
 def makesets(story):
-    sets = entityextract(story)
-    print("ee")
-    print([(x[0],x[1].entity,x[1].num) for x in sets])
+    sets = extract_quantify(story)
+    (sets, good) = question_entity(story, sets)
+    sets = circumscription(story, sets)            
+    sets = assert_question_entity(story, sets, good)
+    sets = sorted(sets)
+    # print("ee")
+    # print([(x[0],x[1].entity,x[1].num) for x in sets])
     sets = fix_half(sets)
     print([(x[0],x[1].entity,x[1].num) for x in sets])
     sets = containers(sets,story)
@@ -885,17 +898,17 @@ def makesets(story):
     #sets = oneSet(sets,story)
     sets = uc.main(sets)
     sets = add_bare_sets(sets,story)
-    print("units and bare sets")
-    print([(x[0],x[1].entity,x[1].num) for x in sets])
+    # print("units and bare sets")
+    # print([(x[0],x[1].entity,x[1].num) for x in sets])
     sets = fix_each(sets)
     sets = fix_times(sets)
-    print('eac')
-    print([(x[0],x[1].entity,x[1].num) for x in sets])
+    # print('eac')
+    # print([(x[0],x[1].entity,x[1].num) for x in sets])
     sets = move_x(sets,story)
     sets = coref(sets)
-    print('mov x')
-    print([(x[0],x[1].entity,x[1].num) for x in sets])
-    print('target entity fix')
+    # print('mov x')
+    # print([(x[0],x[1].entity,x[1].num) for x in sets])
+    # print('target entity fix')
     sets = oneEnt(sets)
     sets = xAdjFix(sets)
     #sets = prune(sets)

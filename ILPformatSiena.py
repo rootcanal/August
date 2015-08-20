@@ -35,10 +35,8 @@ def make_eq(q,a,VERBOSE,TRAIN):
         print(problem)
 
         story = read_parse(k)
-        print(story)
-        exit()
         sets = makesets.makesets(story['sentences'])
-        EF.main(sets,k,a[k])
+        # EF.main(sets,k,a[k],sys.argv[1])
         sets = [x for x in sets if makesets.floatcheck(x[1].num) or x[1].num == 'x']
         print(sets)
         for z in sets:
@@ -46,7 +44,6 @@ def make_eq(q,a,VERBOSE,TRAIN):
 
 def read_parse(k):
     return pickle.load(open('s_data/'+str(k)+'.pickle', 'rb'))
-
 
 def parse_inp(inp):
     q=[]
@@ -80,6 +77,8 @@ if __name__=="__main__":
             TRAIN = True
             OUT = sys.argv[4]
     '''
+    # q = q[-10:]
+    # a = a[-10:]
     make_eq(q,a,VERBOSE,TRAIN)
 
 

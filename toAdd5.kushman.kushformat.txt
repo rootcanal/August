@@ -1,0 +1,29 @@
+For his long distance phone service Milan pays a 2 dollars monthly fee plus 12 cents per minute. Last month , Milan 's long distance bill was 23.36 dollars. For how many minutes was Milan billed for ? 
+2+((12*0.01)*x)=23.36
+178.0
+The value of a sport utility vehicle this year is 16,000 dollars , which is 0.8 of what its value was last year. How much is the value of the vehicle last year?
+16000.0/0.8=x
+20000.0
+Trenton sells electronic supplies. Each week he earns 190 dollars plus commission equal to 0.04 of his sales. This week his goal is to earn no less than 500 dollars. How much sales  he must make to reach his goal?
+190.0+(0.04*x)=500.0
+7750.0
+Tony planted a 4 foot tree. The tree grows at a rate of 5 feet every year. How many years will it take to be 29 feet?
+4.0+(5.0*x)=29.0
+5.0
+The tallest player on the basketball team is 77.75 inches tall. This is 9.5 inches taller than the shortest player. How tall is the shortest player , in inches? 
+x=77.75-9.5
+68.25
+0.20 of a number decreased by 4 is equal to 6. Find the number.
+0.2*x-4.0=6.0
+50.0
+Freeport McMoran projects the world grain supply will be 1800000 metric tons and the supply will be only 0.75 of the world grain demand. What will the world grain demand be?
+1800000.0=0.75*x
+2400000.0
+A 12 ounce can of cranberry juice sells for 84 cents. What is the cost in cents per ounce.
+x=84.0/12.0
+7.0
+Manuel opened a savings account with an initial deposit of 177 dollars. If he wants to save 500 dollars during the next 19 weeks , how much must he save each week , in dollars?       177.0+(19.0*x)=500.0
+17.0
+A mechanic charged 45 dollars an hour , plus 225 dollars for the parts. If the total bill was 450 dollars , how man hours did the job take? 
+(45.0*x)+225.0=450.0
+5.0

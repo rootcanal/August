@@ -1,0 +1,81 @@
+She counted her crayons and found out that she has 80 crayons which she will place in crayon boxes. Every box can contain 8 crayons. How many boxes does she need?
+80/8=x
+10
+There was a stack of 700 sheets of used paper. Lexie wants to place it in boxes for recycling. If every box can contain 100 sheets, how many boxes does Lexie need?
+700/7=x
+7
+Lexie’s mom gathered all her watercolor paintings and thought of placing an equal number of paintings in 4 rooms in the house. If Lexie has 32 watercolor paintings, how many paintings will be placed in each room?
+4*x=32
+8
+Lexie’s younger brother helped pick up all the paper clips in Lexie’s room. He was able to collect 81 paper clips. If he wants to distribute the paper clips in 9 boxes, how many paper clips will each box contain? 
+81/9=x
+9
+The junior ranger asked Christian to help him place 420 seedlings in packets. If every packet needs to contain 7 seeds, how many packets do they need?
+420/7=x
+60
+Christian’s mother prepared lemonade. Every pitcher of lemonade can serve 5 glasses. If she was able to serve 30 glasses of lemonade, how many pitchers of lemonade did she prepare?
+5*x=30
+6
+Christian’s father and the senior ranger gathered firewood as they walked towards the lake in the park and brought with them sacks. If every sack can contain around 20 pieces of wood, how many sacks were they able to fill if they gathered 80 pieces of wood?
+20*x=80
+4
+Christian and the junior ranger brought a bag of 140 nails as they visited every station assigned to the junior ranger. If they left exactly 7 nails in every station they visited, how many stations did Joline and the junior ranger visit?
+140/7=x
+20
+Sunday morning was spent for making wood carvings which can be sold as souvenir for tourists. They were placed in shelves that can contain 8 wood carvings at a time. If 56 wood carvings were displayed, how many shelves were filled with carvings?
+8*x=56
+7
+Shiela has 6 neighbors who like to collect animal drawings. Shiela drew 54 animals on small pieces of paper. If she plans to give the same number of animal drawings to her neighbors, how many will each of them receive?
+6*x=54
+9
+Allen, Shiela’s brother, likes to play with blocks. Shiela repainted Allen’s old blocks in different colors. If Allen has 49 identical blocks and there are 7 blocks for every color of paint used, how many colors did Shiela use?
+49/7=x
+7
+It has been tradition in Shiela’s home to hang a sock above the fireplace for each member of the family. This year, she placed a cinnamon ball every day in the socks for 5 of her family members. How long can she do this if she bought 50 cinnamon balls?
+5*x=50
+10
+9 of Hayley’s closest friends like stickers. If she plans to give all of them an equal number of stickers, how many will each receive if she has 72 stickers?
+9*x=72
+8
+In Haley’s class, 5 are boys who love to play marbles. If Haley has 35 marbles, how many will each of the boys receive?
+5*x=35
+7
+When relatives visit Haley and her family, she and her cousins do origami. If she has 48 origami papers to give away to her 6 cousins, how many will each receive if she gives everyone the same number of origami papers?
+48/6=x
+8
+A large bag of balls was kept under Haley’s bed. Her mom placed the balls in bags for children in foster homes. If every bag can contain 4 balls and Haley has 36 balls, how many bags will be used?
+4*x=36
+9
+Haley has 63 magazines in her cabinet. She plans to send it to the recycling office in their area. If she places it in boxes which can contain 9 magazines, how many boxes will Hayley use?
+63/9=x
+7
+Betty bought 88 pink flower stones and wanted to make 8 bracelets out of these stones. How many pink flower stones will each bracelet have if she used the same number of stones in each bracelet?
+88/8=x
+11
+Betty also bought 140 shiny blue round stones. If 14 pieces of this stone is in each bracelet, how many bracelets of blue shiny round stones will there be?
+140/14=x
+10
+Brenda, Betty’s sister, wanted to have 3 bracelets with star-shaped stones. She also bought 36 star-shaped stones from the local store and gave it to Betty. How many star-shaped stones will there be in each of the bracelet Betty makes for Brenda?
+3*x=36
+12
+Shannon, Brenda’s neighbor, joined Brenda in making bracelets. She brought 48 heart-shaped stones and wanted to have 8 of this type of stone in each of the bracelet she makes. How many bracelets with heart-shaped stones can Shannon make?
+48/8=x
+6
+Brenda’s mother made cookies for 5. If she prepared 35 cookies and each of them had the same number of cookies, how many did each of them have?
+5*x=35
+7
+Jane had been saving large empty cans to serve as pots for sunflowers. If she has 54 sunflower seeds and there are 9 cans, how many seeds will be placed in each can if she places an equal number of seeds in each can?
+54/9=x
+6
+Jane’s mom picked cherry tomatoes from their backyard. If she gathered 56 cherry tomatoes and is about to place them in small jars which can contain 8 cherry tomatoes at a time, how many jars will she need?
+56/8=x
+7
+Jane helped her mom prepare fresh lemonade. If each glass needs 2 lemons, how many glasses of fresh lemonade can she make if they have 18 lemons?
+2*x=18
+9
+Jane’s dad brought home 24 marble potatoes. If Jane’s mom made potato salad for lunch and served an equal amount of potatoes to Jane, herself and her husband, how many potatoes did each of them have?
+24/3=x
+8
+For dessert, Jane’s mom prepared 12 pieces of bite-size cinnamon swirls. If the 3 of them ate an equal number of pieces of cinnamon swirls, how many pieces did Jane eat?
+12/3=x
+4

@@ -1,0 +1,19 @@
+Tom purchased a football game for $14.02, a strategy game for $9.46, and a Batman game for $12.04. How much did Tom spend on video games?
+14.02+9.46+12.04=x
+35.52
+Mike bought some toys. He bought marbles for $9.05, a football for $4.95, and spent $6.52 on a baseball. In total, how much did Mike spend on toys?
+9.05+4.95+6.52=x
+20.52
+The basketball coach bought 9 new basketballs for $14 each. The baseball coach bought 7 new baseballs for $1 each. How much more did the basketball coach spend than the baseball coach?
+(9*14)-(7*1)=x
+119
+7 students and 2 teachers went on a field trip to an art museum. Student tickets cost $5 each, and adult tickets cost $9 each. How much did the museum tickets cost in all?
+(7*5)+(2*9)=x
+53
+Lindsey earns $8 per hour. Last week, she worked 7 hours on Monday, 6 hours on Tuesday, and 3 hours on Wednesday. She had Thursday off, and then she worked 9 hours on Friday. How much money did Lindsey earn in all last week?
+8*((7+6)+(3+9))=x
+200
+Luke had 20 stickers. He bought 12 stickers from a store in the mall and got 20 stickers Ethan needs 38 cupcakes for a birthday party. He already has 20 chocolate cupcakes and 10 vanilla cupcakes. How many more cupcakes should Ethan buy?
+38-(20+10)=x
+8
+

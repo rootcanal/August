@@ -1,0 +1,61 @@
+How many cookies would you have if you had 37 bags of cookies with 19 cookies in each bag?
+37*19=x
+703
+The Ferris wheel in Paradise Park has 14 seats. Each seat can hold 6 people. How many people can ride the Ferris wheel at the same time?
+14*6=x
+84
+There are 261 fishbowls. Each fishbowl has 23 fish. How many fish are there?
+261*23=x
+6003
+We ordered 21 pizzas. Each pizza has 8 slices. How many slices of pizza are there altogether?
+21*8=x
+168
+Emily collected eggs from the hen and put them into 303 baskets. She put 28 eggs into each basket. How many eggs did Emily collect?
+303*28=x
+8484
+There are 37 baskets. There are 17 apples in each basket. How many apples are there in all?
+37*17=x
+629
+Bryan took a look at his books as well. If Bryan has 56 books in each of his 9 bookshelves, how many books does he have in total?
+56*9=x
+504
+If books came from all the 4 continents that Bryan had been into and he collected 122 books per continent, how many books does he have from all 4 continents combined?
+4*122=x
+488
+Bryan had 8 precious stones in his collection which he sold to his friend from the jewelry store. If the stones were sold at 1785 dollar each, how much money did Bryan get in total?
+8*1785=x
+14280
+The farmers reported that they harvest 45 sacks of apples from each of the 8 sections of
+the orchard daily. How many sacks are harvested every day?
+45*8=x
+360
+Lewis then went to see the oranges being harvested. Lewis found out that they harvest 83 sacks per day. How many sacks of oranges will they have after 6 days of harvest?
+83*6=x
+498
+Lewis saved checking on the grapevines for his last stop. He was told by one of the pickers that they fill 324 drums of grapes per day. How many drums of grapes would be filled in 9 days?
+324*9=x
+2916
+Upon arriving at the circus, they went to the ticket booth and asked how much each ticket cost. If each ticket costs 44 dollars and they bought 7 tickets, how much money did they spend on tickets?
+44*7=x
+308
+They entered the circus tent and saw that there are 4 sections for the audience. If each section can accommodate 246 people, how many people can the tent accommodate in total?
+4*246=x
+984
+The first act included 5 clown mobiles, each stuffed with 28 clowns. How many clowns are inside all the clown mobiles combined?
+5*28=x
+140
+The next act involved several jugglers. If each juggler is juggling 6 balls at a time, how many balls are needed if there are 378 jugglers putting a show at the same time?
+6*378=x
+2268
+For the final act, the circus brought out dancing animals wearing crowns. If each crown is made with 7 different colored feathers, how many feathers are needed for 934 crowns?
+7*934=x
+6538
+The library is divided into different sections for different type of books. The science fiction section has 8 books. If each book has 478 pages, how many pages do all the books have in total?
+8*478=x
+3824
+Jack has a section filled with short story booklets. If each booklet has 9 pages and there are 49 booklets in the short story section, how many pages will Jack need to go through if he plans to read them all?
+9*49=x
+441
+The mini library also has a section for the classics. If Jack has a collection of 6 classic authors, with each author having 33 books, how many books does he have in the classics section?
+6*33=x
+198

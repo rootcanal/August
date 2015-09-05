@@ -1,7 +1,7 @@
-constants : 2 36.0 12
+constants : 9 12
 unknowns : x
 operators : + - * / =
-objtypes : people quarter dozen
-constantOrUnknownType : 0 1 1 2
-n : 7
-answer : 3
+objtypes : dollar quarter dozen
+constantOrUnknownType : 0 1 2
+n : 5
+answer :  3.0

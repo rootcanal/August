@@ -6,6 +6,8 @@ import makesets
 import pickle
 from random import randint
 from train_local import get_k_eqs
+from train_local import read_parse
+from train_local import parse_inp
 from functools import reduce
 sys.path.insert(0, '/Users/rikka/libsvm-3.18/python')
 from svmutil import *
@@ -43,6 +45,7 @@ def make_eq(q,a,equations):
                 seeneq.append(x[1])
         answers = seen
         answers = list(set(answers))
+        
 
 
         #First preprocessing, tokenize slightly
@@ -56,8 +59,10 @@ def make_eq(q,a,equations):
         problem = " " + problem + " "
         print(problem)
 
+
         #make story
-        story = nlp.parse(problem)
+        #story = nlp.parse(problem)
+        story = read_parse(int(equations[k]))
         sets = makesets.makesets(story['sentences'])
         i = 0
 
@@ -134,7 +139,7 @@ def make_eq(q,a,equations):
             score *= compute(p,'=',e,target,problem,story,order,score,cons)[0]
             scores.append((score,j,eq,guess))
         scores = sorted(scores,reverse=True)
-        righties = [x for x in scores[:3] if x[1]==1]
+        righties = [x for x in scores if x[1]==1]
         print(scores[:3])
         if not righties:
             wrong+=1
@@ -144,24 +149,6 @@ def make_eq(q,a,equations):
             corr = righties[0][3]
 
 
-        '''
-        guessd = {}
-        for x in scores[:3]:
-            if x[3] not in guessd:
-                guessd[x[3]]=x[0]
-            else:
-                guessd[x[3]]+=x[0]
-
-        guessd = sorted(guessd.items(),key=lambda x: x[1],reverse=True)
-
-        if guessd[0][0]==corr:
-            right+=1
-            print("CORRECT")
-        else:
-            wrong += 1
-            print("INCORRECT")
-
-        '''
         if len(scores)>0:
             if scores[0][1]==1:
                 right += 1
@@ -200,24 +187,6 @@ def compute(p,op,e,target,problem,story,order,score=None,cons=None):
 
     c = makesets.combine(p[1],e[1],op)
     return (val,c,op_val)
-
-
-def parse_inp(inp):
-    q=[]
-    a=[]
-    e=[]
-    with open(inp) as f:
-        f = f.readlines()
-        i=0
-        while i<len(f):
-            q.append(f[i])
-            i+=1
-            e.append(f[i])
-            i+=1
-            a.append(f[i])
-            i+=1
-    return (q,a,e)
-
 
 
 if __name__=="__main__":

@@ -4,4 +4,4 @@ operators : + - * / =
 objtypes : sticker
 constantOrUnknownType : 0 0 0 0 0 0
 n : 11
-answer : 2
+answer :  2.0

@@ -4,4 +4,4 @@ operators : + - * / =
 objtypes : male salmon
 constantOrUnknownType : 0 1 1
 n : 5
-answer : 971639
+answer :  971639.0

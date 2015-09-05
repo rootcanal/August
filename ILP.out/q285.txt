@@ -4,4 +4,4 @@ operators : + - * / =
 objtypes : dollar chair
 constantOrUnknownType : 0 1 0
 n : 5
-answer : 180
+answer :  180.0

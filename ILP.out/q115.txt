@@ -4,4 +4,4 @@ operators : + - * / =
 objtypes : dollar house dozen
 constantOrUnknownType : 0 1 0 2
 n : 7
-answer : 200
+answer :  200.0

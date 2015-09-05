@@ -4,4 +4,4 @@ operators : + - * / =
 objtypes : bicycle tricycle wheel
 constantOrUnknownType : 0 1 2 2 2
 n : 9
-answer : 90
+answer :  90.0

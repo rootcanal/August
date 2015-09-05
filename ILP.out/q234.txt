@@ -4,4 +4,4 @@ operators : + - * / =
 objtypes : muff
 constantOrUnknownType : 0 0 0
 n : 5
-answer : 7790
+answer :  7790.0

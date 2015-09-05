@@ -4,4 +4,4 @@ operators : + - * / =
 objtypes : marble
 constantOrUnknownType : 0 0 0
 n : 5
-answer : 50
+answer :  50.0

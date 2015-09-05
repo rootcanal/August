@@ -4,4 +4,4 @@ operators : + - * / =
 objtypes : onion
 constantOrUnknownType : 0 0 0 0
 n : 7
-answer : 18
+answer :  18.0

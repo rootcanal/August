@@ -4,4 +4,4 @@ operators : + - * / =
 objtypes : money shirt
 constantOrUnknownType : 0 1 0 0 0
 n : 9
-answer : 74
+answer :  74.0

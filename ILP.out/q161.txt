@@ -4,4 +4,4 @@ operators : + - * / =
 objtypes : balloon Nancy
 constantOrUnknownType : 0 1 0
 n : 5
-answer : 28
+answer :  28.0

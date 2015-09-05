@@ -4,4 +4,4 @@ operators : + - * / =
 objtypes : pear
 constantOrUnknownType : 0 0 0 0
 n : 7
-answer : 105
+answer :  105.0

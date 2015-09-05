@@ -4,4 +4,4 @@ operators : + - * / =
 objtypes : dollar
 constantOrUnknownType : 0 0 0 0
 n : 7
-answer : 33.56
+answer :  33.56

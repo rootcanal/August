@@ -4,4 +4,4 @@ operators : + - * / =
 objtypes : card half
 constantOrUnknownType : 0 1 0 0
 n : 7
-answer : 64
+answer :  64.0

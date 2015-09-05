@@ -4,4 +4,4 @@ operators : + - * / =
 objtypes : student bus
 constantOrUnknownType : 0 1 0 0
 n : 7
-answer : 53
+answer :  53.0

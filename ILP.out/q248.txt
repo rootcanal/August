@@ -4,4 +4,4 @@ operators : + - * / =
 objtypes : yard
 constantOrUnknownType : 0 0 0
 n : 5
-answer : 111421
+answer :  111421.0

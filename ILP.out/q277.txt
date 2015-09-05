@@ -4,4 +4,4 @@ operators : + - * / =
 objtypes : package can
 constantOrUnknownType : 0 0 1 1 1
 n : 9
-answer : 55
+answer :  55.0

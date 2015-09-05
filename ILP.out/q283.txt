@@ -4,4 +4,4 @@ operators : + - * / =
 objtypes : child seat
 constantOrUnknownType : 0 0 1
 n : 5
-answer : 29
+answer :  29.0

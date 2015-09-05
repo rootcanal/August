@@ -4,4 +4,4 @@ operators : + - * / =
 objtypes : tree
 constantOrUnknownType : 0 0 0
 n : 5
-answer : 33
+answer :  33.0

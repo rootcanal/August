@@ -204,6 +204,11 @@ def vector(a,b,problem,story,target,feats=False):
     if "end with" in problem: vec.append(1)
     else: vec.append(0)
     problem = problem.split()
+    features.extend("comparatives")
+    comparitive = 0
+    for li in ['bigger','larger','further','farther','longer','taller']:
+        if li in problem: comparitive = 1 ; break
+    vec.append(comparitive)
     features.extend(["times","total","together","more","less","add","divide","split","left","equal","equally","now",'left','start'])
     for li in ["times","total","together","more","less","add","divide","split","left","equal","equally","now",'left','start']:
         if li in problem:
@@ -890,10 +895,7 @@ def makesets(story):
     # print("ee")
     # print([(x[0],x[1].entity,x[1].num) for x in sets])
     sets = fix_half(sets)
-    print([(x[0],x[1].entity,x[1].num) for x in sets])
     sets = containers(sets,story)
-    print("c")
-    print([(x[0],x[1].entity,x[1].num) for x in sets])
     #sets = circumscription(sets,story)
     #sets = oneSet(sets,story)
     sets = uc.main(sets)
@@ -909,39 +911,11 @@ def makesets(story):
     # print('mov x')
     # print([(x[0],x[1].entity,x[1].num) for x in sets])
     # print('target entity fix')
-    sets = oneEnt(sets)
+    #sets = oneEnt(sets)
     sets = xAdjFix(sets)
     #sets = prune(sets)
     #print([(x[0],x[1].entity,x[1].num) for x in sets])
     #rewrite(sets,story)
-    
-
-    '''
-    THIS CODE PRODUCES ? ENTITIES WHICH ARE NOT O.W. CAPTURED BY PREVIOUS RULES
-    
-    ents = set([x[1].entity for x in sets])
-    idxs = [x[1].idx for x in sets]
-    for j,s in enumerate(story):
-        deps = s['indexeddependencies']
-        lemmas = [x[1]["Lemma"] for x in s['words']]
-        for e in ents:
-            for i,l in enumerate(lemmas):
-                if l == e:
-                    eidx = j*1000+i
-                    if eidx in idxs:
-                        # this occurrence is already accounted for
-                        continue
-                    else:
-                        print(j*1000+i)
-                        surface = s['words'][i][0]
-                        edeprep = surface+'-'+str(i+1)
-                        edep = [x[2].split("-")[0] for x in deps if x[1] == edeprep and x[0] == 'det']
-                        if edep:
-                            num = edep[0]
-                        else:
-                            num = "?"
-                        sets.append(((j*1000)+i,aset(num,l,surface,j*1000+i)))
-    '''
     
     i=0
     #print(sets)
@@ -952,19 +926,6 @@ def makesets(story):
         else:
             i+=1
 
-    #print(sets)
-    '''
-    i = 0
-    while i < len(sets):
-        x = sets[i]
-        dups = [y for y in sets if y[0]==x[0]]
-        if len(dups)>1:
-            #print("dups ",dups); exec(input());input()
-            for y in dups[:-1]:
-                sets.remove(y)
-        i+=1
-    '''
-        
     #fix idx
     for idx,x in sets:
         x.idx = idx

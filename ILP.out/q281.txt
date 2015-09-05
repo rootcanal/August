@@ -4,4 +4,4 @@ operators : + - * / =
 objtypes : pizza slice
 constantOrUnknownType : 0 1 1
 n : 5
-answer : 20
+answer :  20.0

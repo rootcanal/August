@@ -4,4 +4,4 @@ operators : + - * / =
 objtypes : tree dogwood
 constantOrUnknownType : 0 0 1
 n : 5
-answer : 83
+answer :  83.0

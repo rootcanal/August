@@ -4,4 +4,4 @@ operators : + - * / =
 objtypes : orange
 constantOrUnknownType : 0 0 0
 n : 5
-answer : 227
+answer :  227.0

@@ -4,4 +4,4 @@ operators : + - * / =
 objtypes : dime
 constantOrUnknownType : 0 0 0
 n : 5
-answer : 4
+answer :  4.0

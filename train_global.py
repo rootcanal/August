@@ -7,6 +7,7 @@ import makesets
 import pickle
 from random import randint
 from train_local import get_k_eqs
+from train_local import read_parse
 sys.path.insert(0, '/Users/rikka/libsvm-3.18/python')
 from svmutil import *
 from random import sample
@@ -93,7 +94,8 @@ def make_eq(q,a,equations):
         print(problem)
 
         #make story
-        story = nlp.parse(problem)
+        #story = nlp.parse(problem)
+        story = read_parse(int(equations[k]))
         sets = makesets.makesets(story['sentences'])
         i = 0
 
@@ -109,14 +111,14 @@ def make_eq(q,a,equations):
         numlist = [x for x in numlist if x[0]!='']
         allnumbs = {str(k):v for k,v in numlist}
         objs = {k:(0,v) for k,v in numlist}
-        print(numlist)
+        #print(numlist)
         consts = [x for x in answers[0][1].split(" ") if x not in ['(',')','+','-','/','*','=',]]
-        print(consts)
+        #print(consts)
         present = [x for x in consts if x in objs]
         if present!=consts: print(present,consts);print("missing thing");continue
 
         scores = []
-        print(answers)
+        #print(answers)
 
         for j,eq,cons in answers:
             consts = [x for x in eq.split(" ") if x not in ['(',')','+','-','/','*','=',]]

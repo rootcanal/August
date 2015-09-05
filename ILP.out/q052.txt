@@ -4,4 +4,4 @@ operators : + - * / =
 objtypes : balloon
 constantOrUnknownType : 0 0 0 0
 n : 7
-answer : 104
+answer :  104.0

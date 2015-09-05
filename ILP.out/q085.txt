@@ -4,4 +4,4 @@ operators : + - * / =
 objtypes : scissors
 constantOrUnknownType : 0 0 0
 n : 5
-answer : 76
+answer :  76.0

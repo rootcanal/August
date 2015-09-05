@@ -4,4 +4,4 @@ operators : + - * / =
 objtypes : ton
 constantOrUnknownType : 0 0 0
 n : 5
-answer : 14696
+answer :  14696.0

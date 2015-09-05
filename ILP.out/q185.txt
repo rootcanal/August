@@ -4,4 +4,4 @@ operators : + - * / =
 objtypes : game month
 constantOrUnknownType : 0 1 0
 n : 5
-answer : 14
+answer :  14.0

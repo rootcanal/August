@@ -5,7 +5,6 @@ import jsonrpclib
 import makesets
 import pickle
 from random import randint
-import EntityFileCreator as EF
 
 OUT=None
 
@@ -24,9 +23,6 @@ def cleannum(n):
 
 def make_eq(q,a,VERBOSE,TRAIN):
     bigtexamples = {x:([],[]) for x in ["+","*",'/','-','=']}
-    #wps = open(q).readlines()
-    #answs = open(a).readlines()
-    #VERBOSE=True
     wps = q
 
 
@@ -43,7 +39,7 @@ def make_eq(q,a,VERBOSE,TRAIN):
         #First preprocessing, tokenize slightly
         problem = problem.strip().split(" ")
         for i,x in enumerate(problem):
-            if len(x)==0:continue
+            if len(x)==0: continue
             if x[-1] in [',','.','?']:
                 problem[i] = x[:-1]+" "+x[-1]
         problem = ' '.join(problem)
@@ -51,14 +47,8 @@ def make_eq(q,a,VERBOSE,TRAIN):
         print(problem)
 
         story = nlp.parse(problem)
-        pickle.dump(open("s_data/"+str(k)+".pickle",'rb'),story)
+        pickle.dump(story,open("s_data/"+str(k)+".pickle",'wb'))
         continue
-        sets = makesets.makesets(story['sentences'])
-        EF.main(sets,k,a[k],sys.argv[1])
-        sets = [x for x in sets if makesets.floatcheck(x[1].num) or x[1].num == 'x']
-        print(sets)
-        for z in sets:
-            z[1].details()
 
 def parse_inp(inp):
     q=[]

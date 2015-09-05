@@ -4,4 +4,4 @@ operators : + - * / =
 objtypes : coin
 constantOrUnknownType : 0 0 0 0 0
 n : 9
-answer : 15
+answer :  15.0

@@ -15,6 +15,7 @@ for k,x in enumerate(['+','-','*','/']):
         k=1
     '''
     #k = int(k>1)
+    print(len(d[x][0]))
     for v in d[x][0]:
         #print(v);input()
         f.write(str(k)+" ")

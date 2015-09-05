@@ -4,4 +4,4 @@ operators : + - * / =
 objtypes : cantelope
 constantOrUnknownType : 0 0 0
 n : 5
-answer : 82
+answer :  82.0

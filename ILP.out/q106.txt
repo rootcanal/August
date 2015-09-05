@@ -4,4 +4,4 @@ operators : + - * / =
 objtypes : student classroom
 constantOrUnknownType : 0 0 1
 n : 5
-answer : 13
+answer :  13.0

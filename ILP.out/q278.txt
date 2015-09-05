@@ -4,4 +4,4 @@ operators : + - * / =
 objtypes : ticket
 constantOrUnknownType : 0 0 0 0 0
 n : 9
-answer : 9
+answer :  9.0

@@ -1,7 +1,7 @@
-constants : 3 24
+constants : 24
 unknowns : x
 operators : + - * / =
-objtypes : people crayon
-constantOrUnknownType : 0 1 1
-n : 5
-answer : 8
+objtypes : crayon
+constantOrUnknownType : 0 0
+n : 3
+answer :  8.0

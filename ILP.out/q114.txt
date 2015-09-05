@@ -4,4 +4,4 @@ operators : + - * / =
 objtypes : piece student
 constantOrUnknownType : 0 1 0
 n : 5
-answer : 8
+answer :  8.0

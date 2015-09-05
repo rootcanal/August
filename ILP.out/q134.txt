@@ -4,4 +4,4 @@ operators : + - * / =
 objtypes : nickel
 constantOrUnknownType : 0 0 0
 n : 5
-answer : 12
+answer :  12.0

@@ -4,4 +4,4 @@ operators : + - * / =
 objtypes : peach
 constantOrUnknownType : 0 0 0
 n : 5
-answer : 42
+answer :  42.0

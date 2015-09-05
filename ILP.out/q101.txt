@@ -1,7 +1,7 @@
-constants : 7 63
+constants : 63
 unknowns : x
 operators : + - * / =
-objtypes : day hamburger
-constantOrUnknownType : 0 1 1
-n : 5
-answer : 9
+objtypes : hamburger
+constantOrUnknownType : 0 0
+n : 3
+answer :  9.0

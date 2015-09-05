@@ -36,7 +36,7 @@ def make_eq(q,a,VERBOSE,TRAIN):
 
         story = read_parse(k)
         sets = makesets.makesets(story['sentences'])
-        # EF.main(sets,k,a[k],sys.argv[1])
+        EF.main(sets,k,a[k],sys.argv[1])
         sets = [x for x in sets if makesets.floatcheck(x[1].num) or x[1].num == 'x']
         print(sets)
         for z in sets:

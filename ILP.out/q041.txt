@@ -4,4 +4,4 @@ operators : + - * / =
 objtypes : pencil
 constantOrUnknownType : 0 0 0
 n : 5
-answer : 71
+answer :  71.0

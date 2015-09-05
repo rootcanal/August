@@ -4,4 +4,4 @@ operators : + - * / =
 objtypes : money book
 constantOrUnknownType : 0 1 0 0
 n : 7
-answer : 35
+answer :  35.0

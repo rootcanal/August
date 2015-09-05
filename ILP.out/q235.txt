@@ -4,4 +4,4 @@ operators : + - * / =
 objtypes : pound
 constantOrUnknownType : 0 0 0
 n : 5
-answer : 8564
+answer :  8564.0

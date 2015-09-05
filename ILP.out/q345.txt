@@ -1,0 +1,7 @@
+constants :
+unknowns : x
+operators : + - * / =
+objtypes : truck-load
+constantOrUnknownType : 0
+n : 1
+answer :  0.6666666666666666

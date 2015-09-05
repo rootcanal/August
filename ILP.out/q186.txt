@@ -1,7 +1,7 @@
-constants : 2 4
+constants : 4
 unknowns : x
 operators : + - * / =
-objtypes : people gumball money
-constantOrUnknownType : 0 1 2
-n : 5
-answer : 32
+objtypes : gumball money
+constantOrUnknownType : 0 1
+n : 3
+answer :  32.0

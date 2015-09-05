@@ -1,0 +1,6 @@
+parameters: n=3 l=1 k=1 p=5 q=1 m=7
+TOTAL 4 solutions found
+SOLN: CORRECT | POS/NEG | INT/FRA | OBJ-SCORE | TRUE-ANS | ANS | INFIX | POSTFIX | TYPED-POSTFIX
+EXPR: 0 | POS | FRA | 0 | 3.66667 | 3.83333333333333 | x=3.8333333333333335 | x 3.8333333333333335 = | x:mile 3.8333333333333335:mile =:mile
+EXPR: 0 | POS | FRA | 0 | 3.66667 | 3.83333333333333 | 3.8333333333333335=x | 3.8333333333333335 x = | 3.8333333333333335:mile x:mile =:mile
+NET 2 unique, non-negative solutions found out of 4 total solutions

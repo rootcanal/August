@@ -6,6 +6,8 @@ import makesets
 import pickle
 from random import randint
 
+def read_parse(k):
+    return pickle.load(open('s_data/'+str(k)+'.pickle', 'rb'))
 
 class StanfordNLP:
     def __init__(self, port_number=8080):
@@ -14,7 +16,7 @@ class StanfordNLP:
     def parse(self, text):
         return json.loads(self.server.parse(text))
 
-nlp = StanfordNLP()
+#nlp = StanfordNLP()
 
 def cleannum(n):
     n = ''.join([x for x in n if x.isdigit() or x=='.' or x=='x' or x=='x*'])
@@ -56,19 +58,18 @@ def make_eq(q,a,equations):
         print(k)
         print(problem)
 
-        story = nlp.parse(problem)
-        ###THIS IS JUST TO GET DATA TO SIENA
-        pickle.dump(story, open("s_data/"+str(k)+".pickle",'wb'))
-        continue
-
+        #story = nlp.parse(problem)
+        story = read_parse(int(equations[k]))
         eqs = get_k_eqs(equations[k])
         answers = [x[1] for x in eqs if x[0]==1]
         if answers == []: continue
         answers = list(set(answers))
+        print(story["sentences"][0]["text"])
+        print(answers)
 
 
         #make story
-        story = nlp.parse(problem)
+        #story = nlp.parse(problem)
         sets = makesets.makesets(story['sentences'])
         i = 0
 
@@ -84,24 +85,11 @@ def make_eq(q,a,equations):
         print(objs.items())
         consts = [x for x in answers[0].split(" ") if x not in ['(',')','+','-','/','*','=',]]
         present = [x for x in consts if x in objs]
-        if present!=consts: print(present,consts);print("missing thing");continue
+        if present!=consts: 
+            print(present,consts);print("missing thing");#continue
+            exit()
 
         #simpleanswers = []
-        #for x in answers:
-        #    try:
-        #        x1 = x[1].strip().split(" ")
-        #        if x[-2]=='=' and x[-1]=='x':
-        #            simplenaswers.append(x)
-        #    except:
-        #        pass
-        #if simpleanswers:
-        #    answers = simpleanswers
-
-        #ri = randint(0,len(answers)-1)
-        #if answers == []:
-        #    continue
-        #answers = [answers[0]]
-
         for j,eq in enumerate(answers):
             trips = []
             print(j,eq)

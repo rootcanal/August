@@ -4,4 +4,4 @@ operators : + - * / =
 objtypes : cake
 constantOrUnknownType : 0 0 0 0
 n : 7
-answer : 14
+answer :  14.0

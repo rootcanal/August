@@ -1,7 +1,7 @@
-constants : 2 45
+constants : 45 5
 unknowns : x
 operators : + - * / =
-objtypes : people dollar
-constantOrUnknownType : 0 1 1
+objtypes : dollar bill
+constantOrUnknownType : 0 1 0
 n : 5
-answer : 9
+answer :  9.0

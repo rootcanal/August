@@ -4,4 +4,4 @@ operators : + - * / =
 objtypes : child dozen pencil
 constantOrUnknownType : 0 1 2 2
 n : 7
-answer : 2208
+answer :  2208.0

@@ -4,4 +4,4 @@ operators : + - * / =
 objtypes : car
 constantOrUnknownType : 0 0 0
 n : 5
-answer : 6755
+answer :  6755.0

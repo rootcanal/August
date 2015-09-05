@@ -4,4 +4,4 @@ operators : + - * / =
 objtypes : ladybug
 constantOrUnknownType : 0 0 0
 n : 5
-answer : 67082
+answer :  67082.0

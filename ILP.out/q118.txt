@@ -4,4 +4,4 @@ operators : + - * / =
 objtypes : marble Melanie dozen
 constantOrUnknownType : 0 1 0 2
 n : 7
-answer : 56
+answer :  56.0

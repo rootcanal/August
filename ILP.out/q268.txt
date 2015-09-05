@@ -4,4 +4,4 @@ operators : + - * / =
 objtypes : carton dollar
 constantOrUnknownType : 0 0 1 1 1
 n : 9
-answer : 118
+answer :  118.0

@@ -1,7 +1,7 @@
-constants : 2 7
+constants : 5 7
 unknowns : x
 operators : + - * / =
-objtypes : people seashell
+objtypes : day seashell
 constantOrUnknownType : 0 1 1
 n : 5
-answer : 35
+answer :  35.0

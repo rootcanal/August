@@ -4,4 +4,4 @@ operators : + - * / =
 objtypes : game
 constantOrUnknownType : 0 0 0 0
 n : 7
-answer : 44
+answer :  44.0

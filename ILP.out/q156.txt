@@ -4,4 +4,4 @@ operators : + - * / =
 objtypes : trout Melanie
 constantOrUnknownType : 0 1 0
 n : 5
-answer : 16
+answer :  16.0

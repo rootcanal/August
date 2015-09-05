@@ -4,4 +4,4 @@ operators : + - * / =
 objtypes : penny
 constantOrUnknownType : 0 0 0
 n : 5
-answer : 5
+answer :  5.0

@@ -4,4 +4,4 @@ operators : + - * / =
 objtypes : plum
 constantOrUnknownType : 0 0 0 0
 n : 7
-answer : 16
+answer :  16.0

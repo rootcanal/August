@@ -4,4 +4,4 @@ operators : + - * / =
 objtypes : dozen calorie bar
 constantOrUnknownType : 0 1 2 1
 n : 7
-answer : 2016
+answer :  2016.0

@@ -4,4 +4,4 @@ operators : + - * / =
 objtypes : half-dollar
 constantOrUnknownType : 0 0
 n : 5
-answer : 11.50
+answer :  11.5

@@ -1,0 +1,40 @@
+parameters: n=5 l=2 k=1 p=5 q=2 m=8
+TOTAL 56 solutions found
+SOLN: CORRECT | POS/NEG | INT/FRA | OBJ-SCORE | TRUE-ANS | ANS | INFIX | POSTFIX | TYPED-POSTFIX
+EXPR: 1 | POS | FRA | 0 | 0.31 | 0.31 | x=(0.36-0.05) | x 0.36 0.05 - = | x:pound 0.36:pound 0.05:pound -:pound =:pound
+EXPR: 0 | POS | FRA | 0 | 0.31 | 0.41 | (0.36+0.05)=x | 0.36 0.05 + x = | 0.36:pound 0.05:pound +:pound x:pound =:pound
+EXPR: 0 | POS | FRA | 0 | 0.31 | 7.2 | x=(0.36/0.05) | x 0.36 0.05 / = | x:pound 0.36:pound 0.05:pound /:pound =:pound
+EXPR: 0 | POS | FRA | 0 | 0.31 | 7.2 | (0.36/0.05)=x | 0.36 0.05 / x = | 0.36:pound 0.05:pound /:pound x:pound =:pound
+EXPR: 0 | POS | FRA | 0 | 0.31 | 0.018 | (0.36*0.05)=x | 0.36 0.05 * x = | 0.36:pound 0.05:pound *:pound x:pound =:pound
+EXPR: 1 | POS | FRA | 0 | 0.31 | 0.31 | (0.36-0.05)=x | 0.36 0.05 - x = | 0.36:pound 0.05:pound -:pound x:pound =:pound
+EXPR: 0 | POS | FRA | 0 | 0.31 | 0.41 | x=(0.36+0.05) | x 0.36 0.05 + = | x:pound 0.36:pound 0.05:pound +:pound =:pound
+EXPR: 0 | POS | FRA | 0 | 0.31 | 0.018 | x=(0.36*0.05) | x 0.36 0.05 * = | x:pound 0.36:pound 0.05:pound *:pound =:pound
+EXPR: 0 | POS | FRA | 2 | 0.31 | 0.138888888888889 | 0.36=(0.05/x) | 0.36 0.05 x / = | 0.36:pound 0.05:pound x:pound /:pound =:pound
+EXPR: 0 | POS | FRA | 2 | 0.31 | 0.41 | 0.36=(x-0.05) | 0.36 x 0.05 - = | 0.36:pound x:pound 0.05:pound -:pound =:pound
+EXPR: 0 | POS | FRA | 2 | 0.31 | 0.018 | 0.36=(x/0.05) | 0.36 x 0.05 / = | 0.36:pound x:pound 0.05:pound /:pound =:pound
+EXPR: 0 | POS | FRA | 2 | 0.31 | 7.2 | 0.36=(0.05*x) | 0.36 0.05 x * = | 0.36:pound 0.05:pound x:pound *:pound =:pound
+EXPR: 1 | POS | FRA | 2 | 0.31 | 0.31 | 0.36=(x+0.05) | 0.36 x 0.05 + = | 0.36:pound x:pound 0.05:pound +:pound =:pound
+EXPR: 0 | POS | FRA | 2 | 0.31 | 7.2 | (0.36/x)=0.05 | 0.36 x / 0.05 = | 0.36:pound x:pound /:pound 0.05:pound =:pound
+EXPR: 0 | POS | FRA | 2 | 0.31 | 0.138888888888889 | (0.36*x)=0.05 | 0.36 x * 0.05 = | 0.36:pound x:pound *:pound 0.05:pound =:pound
+EXPR: 0 | POS | FRA | 2 | 0.31 | 0.138888888888889 | x=(0.05/0.36) | x 0.05 0.36 / = | x:pound 0.05:pound 0.36:pound /:pound =:pound
+EXPR: 1 | POS | FRA | 2 | 0.31 | 0.31 | 0.36=(0.05+x) | 0.36 0.05 x + = | 0.36:pound 0.05:pound x:pound +:pound =:pound
+EXPR: 1 | POS | FRA | 2 | 0.31 | 0.31 | (0.36-x)=0.05 | 0.36 x - 0.05 = | 0.36:pound x:pound -:pound 0.05:pound =:pound
+EXPR: 0 | POS | FRA | 2 | 0.31 | 7.2 | 0.36=(x*0.05) | 0.36 x 0.05 * = | 0.36:pound x:pound 0.05:pound *:pound =:pound
+EXPR: 0 | POS | FRA | 2 | 0.31 | 0.138888888888889 | (0.05/0.36)=x | 0.05 0.36 / x = | 0.05:pound 0.36:pound /:pound x:pound =:pound
+EXPR: 0 | POS | FRA | 2 | 0.31 | 0.41 | (x-0.36)=0.05 | x 0.36 - 0.05 = | x:pound 0.36:pound -:pound 0.05:pound =:pound
+EXPR: 0 | POS | FRA | 2 | 0.31 | 0.018 | (x/0.36)=0.05 | x 0.36 / 0.05 = | x:pound 0.36:pound /:pound 0.05:pound =:pound
+EXPR: 0 | POS | FRA | 2 | 0.31 | 0.138888888888889 | (x*0.36)=0.05 | x 0.36 * 0.05 = | x:pound 0.36:pound *:pound 0.05:pound =:pound
+EXPR: 0 | POS | FRA | 4 | 0.31 | 0.41 | 0.05=(x-0.36) | 0.05 x 0.36 - = | 0.05:pound x:pound 0.36:pound -:pound =:pound
+EXPR: 0 | POS | FRA | 4 | 0.31 | 7.2 | (0.05*x)=0.36 | 0.05 x * 0.36 = | 0.05:pound x:pound *:pound 0.36:pound =:pound
+EXPR: 1 | POS | FRA | 4 | 0.31 | 0.31 | (x+0.05)=0.36 | x 0.05 + 0.36 = | x:pound 0.05:pound +:pound 0.36:pound =:pound
+EXPR: 1 | POS | FRA | 4 | 0.31 | 0.31 | 0.05=(0.36-x) | 0.05 0.36 x - = | 0.05:pound 0.36:pound x:pound -:pound =:pound
+EXPR: 0 | POS | FRA | 4 | 0.31 | 7.2 | 0.05=(0.36/x) | 0.05 0.36 x / = | 0.05:pound 0.36:pound x:pound /:pound =:pound
+EXPR: 0 | POS | FRA | 4 | 0.31 | 0.138888888888889 | (0.05/x)=0.36 | 0.05 x / 0.36 = | 0.05:pound x:pound /:pound 0.36:pound =:pound
+EXPR: 0 | POS | FRA | 4 | 0.31 | 0.138888888888889 | 0.05=(x*0.36) | 0.05 x 0.36 * = | 0.05:pound x:pound 0.36:pound *:pound =:pound
+EXPR: 0 | POS | FRA | 4 | 0.31 | 0.018 | 0.05=(x/0.36) | 0.05 x 0.36 / = | 0.05:pound x:pound 0.36:pound /:pound =:pound
+EXPR: 1 | POS | FRA | 4 | 0.31 | 0.31 | (0.05+x)=0.36 | 0.05 x + 0.36 = | 0.05:pound x:pound +:pound 0.36:pound =:pound
+EXPR: 0 | POS | FRA | 4 | 0.31 | 0.138888888888889 | 0.05=(0.36*x) | 0.05 0.36 x * = | 0.05:pound 0.36:pound x:pound *:pound =:pound
+EXPR: 0 | POS | FRA | 4 | 0.31 | 7.2 | (x*0.05)=0.36 | x 0.05 * 0.36 = | x:pound 0.05:pound *:pound 0.36:pound =:pound
+EXPR: 0 | POS | FRA | 4 | 0.31 | 0.018 | (x/0.05)=0.36 | x 0.05 / 0.36 = | x:pound 0.05:pound /:pound 0.36:pound =:pound
+EXPR: 0 | POS | FRA | 4 | 0.31 | 0.41 | (x-0.05)=0.36 | x 0.05 - 0.36 = | x:pound 0.05:pound -:pound 0.36:pound =:pound
+NET 36 unique, non-negative solutions found out of 56 total solutions

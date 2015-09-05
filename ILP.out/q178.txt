@@ -4,4 +4,4 @@ operators : + - * / =
 objtypes : dozen bird
 constantOrUnknownType : 0 1 1
 n : 5
-answer : 12
+answer :  12.0

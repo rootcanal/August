@@ -4,4 +4,4 @@ operators : + - * / =
 objtypes : cupcake vanilla
 constantOrUnknownType : 0 0 1 0
 n : 7
-answer : 32
+answer :  32.0

@@ -4,4 +4,4 @@ operators : + - * / =
 objtypes : watermelon
 constantOrUnknownType : 0 0 0
 n : 5
-answer : 1
+answer :  1.0

@@ -4,4 +4,4 @@ operators : + - * / =
 objtypes : yen
 constantOrUnknownType : 0 0 0
 n : 5
-answer : 9844
+answer :  9844.0

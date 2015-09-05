@@ -4,4 +4,4 @@ operators : + - * / =
 objtypes : hamburger
 constantOrUnknownType : 0 0 0
 n : 5
-answer : 6
+answer :  6.0

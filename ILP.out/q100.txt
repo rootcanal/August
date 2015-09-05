@@ -1,7 +1,7 @@
-constants : 2 18
+constants : 18
 unknowns : x
 operators : + - * / =
-objtypes : people trout
-constantOrUnknownType : 0 1 1
-n : 5
-answer : 9
+objtypes : trout
+constantOrUnknownType : 0 0
+n : 3
+answer :  9.0

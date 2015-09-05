@@ -4,4 +4,4 @@ operators : + - * / =
 objtypes : dozen book
 constantOrUnknownType : 0 1 0 1
 n : 7
-answer : 480
+answer :  480.0

@@ -62,7 +62,6 @@ def training(a,b,problem,story,target,j,order,score,constraints):
 def make_eq(q,a,equations):
     tdata = []
     wps = q #open(q).readlines()
-    answs = a #open(a).readlines()
 
     for k in range(len(wps)):
         print(k,equations[k])
@@ -105,7 +104,6 @@ def make_eq(q,a,equations):
 
         numlist = [(cleannum(v.num),v) for k,v in sets]
         numlist = [x for x in numlist if x[0]!='']
-        allnumbs = {str(k):v for k,v in numlist}
         objs = {k:(0,v) for k,v in numlist}
         #print(numlist)
         consts = [x for x in answers[0][1].split(" ") if x not in ['(',')','+','-','/','*','=',]]
@@ -113,14 +111,12 @@ def make_eq(q,a,equations):
         present = [x for x in consts if x in objs]
         if present!=consts: print(present,consts);print("missing thing");continue
 
-        scores = []
         #print(answers)
 
         for j,eq,cons in answers:
             consts = [x for x in eq.split(" ") if x not in ['(',')','+','-','/','*','=',]]
             order = int(consts==[x[0] for x in numlist])
             if order == 0:continue
-            trips = []
             print(j,eq)
             l,r = [x.strip().split(' ') for x in eq.split('=')]
             consts = " ".join([x for x in answers[0][1].split(" ") if x not in ['(',')','+','-','/','*',]])

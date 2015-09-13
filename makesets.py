@@ -163,8 +163,6 @@ def vector(a,b,problem,story,target,feats=False):
     asent = [x[0] for x in story[asidx]['words']]
     bsent = [x[0] for x in story[bsidx]['words']]
     #words inbetween features
-    awidx = a.idx%1000
-    bwidx = b.idx%1000
     allwords = []
     for j in range(len(story)):
         for i,x in enumerate(story[j]['words']):
@@ -335,7 +333,6 @@ def assert_question_entity(story, sets, good):
 
 def question_entity(story, sets):
     #get question entity
-    ents = [x[1].entity for x in sets]
     q = story[-1]
     j = len(story)-1
     words = q["words"]
@@ -560,8 +557,6 @@ def articulate(sets, deps, thissentsets, j, s):
         esurface = e[1].surface+'-'+str(e[1].widx)
         #print(esurface)
         vbs = [x for x in deps if x[2]==esurface and x[0]=='dobj']
-        if not vbs:
-            numsurfaces = [x for x in deps if e[1].num+'-' in x[2] and x[0]=='dobj']
         if vbs:
             e[1].verbs = ' '.join([x[1].split('-')[0] for x in vbs])
             e[1].role = 'do'
@@ -689,7 +684,6 @@ def fix_each(sets):
         
 def circumscription(story, sets):
     for j,s in enumerate(story):
-        deps = s['indexeddependencies']
         words = s['words']
         othernums = [((j*1000+i), x[0]) for i,x in enumerate(words) if x[1]["PartOfSpeech"]=="CD"]
         othernums = [x for x in othernums if x[0] not in [y[0] for y in sets]]

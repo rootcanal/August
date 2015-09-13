@@ -26,7 +26,6 @@ glob = None
 
 def make_eq(q,a,equations):
     wps = q #open(q).readlines()
-    answs = a #open(a).readlines()
     right = 0
     wrong = 0
 
@@ -77,7 +76,6 @@ def make_eq(q,a,equations):
 
         numlist = [(cleannum(v.num),v) for k,v in sets]
         numlist = [x for x in numlist if x[0]!='']
-        allnumbs = {str(k):v for k,v in numlist}
         objs = {k:(0,v) for k,v in numlist}
         print(objs.items())
         consts = [x for x in answers[0][1].split(" ") if x not in ['(',')','+','-','/','*','=',]]
@@ -93,12 +91,10 @@ def make_eq(q,a,equations):
             if order == 0: continue
             #j = randint(0,len(answers)-1)
             #eq = answers[j]
-            trips = []
             #print(j,eq)
             l,r = [x.strip().split(' ') for x in eq.split('=')]
             consts = " ".join([x for x in answers[0][1].split(" ") if x not in ['(',')','+','-','/','*',]])
             consts = consts.split(" = ")
-            sp = (objs[consts[0].split(" ")[-1]],objs[consts[1].split(" ")[0]])
              
             target = 'x'
             target = (target,objs[target])
@@ -141,9 +137,6 @@ def make_eq(q,a,equations):
             wrong+=1
             print("TOP SCORING NO CORRECT SOLUTION \nINCORRECT")
             continue
-        else:
-            corr = righties[0][3]
-
 
         if len(scores)>0:
             if scores[0][1]==1:

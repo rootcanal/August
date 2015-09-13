@@ -40,7 +40,6 @@ def training(trips,problem,story,target):
 def make_eq(q,a,equations):
     bigtexamples = {x:([],[]) for x in ["+","*",'/','-','=']}
     wps = q #open(q).readlines()
-    answs = a #open(a).readlines()
 
     for k in range(len(wps)):
 
@@ -78,7 +77,6 @@ def make_eq(q,a,equations):
 
         numlist = [(cleannum(v.num),v) for k,v in sets]
         numlist = [x for x in numlist if x[0]!='']
-        allnumbs = {str(k):v for k,v in numlist}
         objs = {k:(0,v) for k,v in numlist}
         print(objs.items())
         consts = [x for x in answers[0].split(" ") if x not in ['(',')','+','-','/','*','=',]]
@@ -97,7 +95,6 @@ def make_eq(q,a,equations):
             target = (target,objs[target])
 
             #find innermost parens?
-            sides = []
             for i,compound in enumerate([l,r]):
                 while len(compound)>1:
                     if "(" in compound:

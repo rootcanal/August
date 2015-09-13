@@ -20,7 +20,6 @@ def cleannum(n):
 
 
 def make_eq(q,a,VERBOSE,TRAIN):
-    bigtexamples = {x:([],[]) for x in ["+","*",'/','-','=']}
     #wps = open(q).readlines()
     #answs = open(a).readlines()
     #VERBOSE=True

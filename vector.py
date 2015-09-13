@@ -124,8 +124,6 @@ def vector(a,b,problem,story,target,feats=False):
     asent = [x[0] for x in story[asidx]['words']]
     bsent = [x[0] for x in story[bsidx]['words']]
     #words inbetween features
-    awidx = a.idx%1000
-    bwidx = b.idx%1000
     allwords = []
     for j in range(len(story)):
         for i,x in enumerate(story[j]['words']):

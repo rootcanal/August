@@ -15,7 +15,8 @@ def parse_stanford_nlp(text, port=8080):
 
 
 def read_parse(k):
-    return pickle.load(open('s_data/'+str(k)+'.pickle', 'rb'))
+    with open('s_data/'+str(k)+'.pickle', 'rb') as f:
+        return pickle.load(f)
 
 
 def parse_inp(inp):

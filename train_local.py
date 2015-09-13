@@ -101,9 +101,8 @@ def make_eq(q, a, equations):
             for op in t:
                 bigtexamples[op][0].extend(t[op][0])
                 bigtexamples[op][1].extend(t[op][1])
-    pickle.dump(
-        bigtexamples, open('data/' + sys.argv[1][-1] + ".local.training", 'wb')
-    )
+    with open('data/' + sys.argv[1][-1] + ".local.training", 'wb') as f:
+        pickle.dump(bigtexamples, f)
 
 
 eqsdir = "ILP.out"

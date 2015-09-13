@@ -8,7 +8,8 @@ import unitConversion as uc
 import utils
 
 FOLD = None
-NAMES = [x.strip() for x in open("names.txt").readlines()]
+with open("names.txt") as f:
+    NAMES = [x.strip() for x in f.readlines()]
 
 
 class aset:

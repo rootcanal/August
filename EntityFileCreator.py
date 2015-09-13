@@ -41,20 +41,20 @@ def getOutputValues(entities, index, answ, fn):
 def printOutputValues(
         constants, unknowns, objtypes, constantOrUnkownType, index, answ, fn
 ):
-    file = open('data/'+fn+'ILP.input', 'a')
-    file.write('\n'+str(index)+'\n')
-    file.write('constants :')
-    writeVals(file, constants)
-    file.write('\n' + 'unknowns :')
-    writeVals(file, unknowns)
-    file.write('\n' + 'operators : + - * / =')
-    file.write('\n' + 'objtypes :')
-    writeVals(file, objtypes)
-    file.write('\n' + 'constantOrUnknownType :')
-    writeVals(file, constantOrUnkownType)
-    file.write('\n' + 'n : ' + str((len(constants) * 2 + 1)))
-    file.write('\nanswer : ' + str(answ))
-    file.write('\n')
+    with open('data/'+fn+'ILP.input', 'a') as file:
+        file.write('\n'+str(index)+'\n')
+        file.write('constants :')
+        writeVals(file, constants)
+        file.write('\n' + 'unknowns :')
+        writeVals(file, unknowns)
+        file.write('\n' + 'operators : + - * / =')
+        file.write('\n' + 'objtypes :')
+        writeVals(file, objtypes)
+        file.write('\n' + 'constantOrUnknownType :')
+        writeVals(file, constantOrUnkownType)
+        file.write('\n' + 'n : ' + str((len(constants) * 2 + 1)))
+        file.write('\nanswer : ' + str(answ))
+        file.write('\n')
 
 
 def writeVals(file, values):

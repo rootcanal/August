@@ -11,9 +11,11 @@ folds.remove(test)
 q, a, e = utils.parse_inp(sys.argv[2])
 train = []
 for x in folds:
-    train.extend(open(datadir + x).readlines())
+    with open(datadir + x) as f:
+        train.extend(f.readlines())
 train = [int(i) - 1 for i in train]
-test = [int(i) - 1 for i in open(datadir + test).readlines()]
+with open(datadir + test) as f:
+    test = [int(i) - 1 for i in f.readlines()]
 assert(len([x for x in train if x in test]) == 0)
 
 trainq = [x for i, x in enumerate(q) if i in train]

@@ -157,12 +157,12 @@ def make_eq(q, a, equations):
                     cons)
             )
 
-    f = open("data/" + sys.argv[1][-1] + ".global.data", 'w')
-    for v in tdata:
-        f.write(str(v[0]) + " ")
-        for i, j in enumerate(v[1:]):
-            f.write(str(i + 1) + ":" + str(j) + " ")
-        f.write("\n")
+    with open("data/" + sys.argv[1][-1] + ".global.data", 'w') as f:
+        for v in tdata:
+            f.write(str(v[0]) + " ")
+            for i, j in enumerate(v[1:]):
+                f.write(str(i + 1) + ":" + str(j) + " ")
+            f.write("\n")
 
 
 if __name__ == "__main__":

@@ -20,8 +20,8 @@ def make_eq(q, a, VERBOSE, TRAIN):
         print(problem)
 
         story = utils.parse_stanford_nlp(problem)
-        pickle.dump(story, open("s_data/" + str(k) + ".pickle", 'wb'))
-        continue
+        with open("s_data/" + str(k) + ".pickle", 'wb') as f:
+            pickle.dump(story, f)
 
 
 if __name__ == "__main__":

@@ -3,6 +3,14 @@ import pickle
 import json
 
 
+verbs = [
+    'be', 'do', 'go', 'have', 'leave', 'keep', 'get', 'make',
+    'tell', 'place', 'lose', 'change', 'give', 'hand', 'take',
+    'buy', 'receive', 'put', 'set', 'like', 'want', 'call',
+    'divide', 'split'
+]
+
+
 def cleannum(n):
     n = ''.join([x for x in n
                  if x.isdigit() or x == '.' or x == 'x' or x == 'x*'])

@@ -2,6 +2,8 @@ from nltk.corpus import wordnet as wn
 from nltk.corpus import wordnet_ic
 brown_ic = wordnet_ic.ic('ic-brown.dat')
 
+import utils
+
 
 def eqvector(a, b, problem, story, target, feats=False):
     vec = vector(a, b, problem, story, target)
@@ -301,15 +303,8 @@ def vector(a, b, problem, story, target, feats=False):
     vec.append(dist)
 
     #verb similarity
-    verbs = [
-        'be', 'do', 'go', 'have', 'leave', 'keep', 'get', 'make',
-        'tell', 'place', 'lose', 'change', 'give', 'hand', 'take',
-        'buy', 'receive', 'put', 'set', 'like', 'want', 'call',
-        'divide', 'split']
-    #verbs = pickle.load(open('data/predicates'+FOLD,'rb'))
-    #verbs = ['add','multiply','divide','subtract']
 
-    for v in verbs:
+    for v in utils.verbs:
         features.append(v)
         vsyns = wn.synsets(v, pos='v')
 

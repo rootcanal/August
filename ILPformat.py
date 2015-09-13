@@ -1,10 +1,7 @@
-import signal
 import sys
 import json
 import jsonrpclib
 import makesets
-import pickle
-from random import randint
 import EntityFileCreator as EF
 
 OUT=None

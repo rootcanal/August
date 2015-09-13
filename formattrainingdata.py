@@ -1,4 +1,4 @@
-import sys, os, pickle
+import sys, pickle
 
 d = pickle.load(open(sys.argv[1],'rb'))
 named = {'+':'plus','-':'minus','/':'divide','*':'multiply','=':'equal'}

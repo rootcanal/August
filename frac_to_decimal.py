@@ -1,5 +1,4 @@
 import sys
-import random
 
 def return_one(p,a,e,i):
     s = '{\n"iIndex": '+str(i)+',\n"sQuestion": "'+p.strip()+'",\n"lEquations": [\n"'+e.strip()+'"\n],\n"lSolutions": [ \n'+a.strip()+'\n ]\n}'

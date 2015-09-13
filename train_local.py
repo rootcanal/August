@@ -1,10 +1,8 @@
-import signal
 import sys
 import json
 import jsonrpclib
 import makesets
 import pickle
-from random import randint
 
 def read_parse(k):
     return pickle.load(open('s_data/'+str(k)+'.pickle', 'rb'))

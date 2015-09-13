@@ -1,14 +1,10 @@
-import signal
 import sys
 import json
 import jsonrpclib
 import makesets
-import pickle
-from random import randint
 from train_local import get_k_eqs
 from train_local import read_parse
 from train_local import parse_inp
-from functools import reduce
 sys.path.insert(0, '/Users/rikka/libsvm-3.18/python')
 from svmutil import *
 

@@ -3,7 +3,6 @@ import json
 import jsonrpclib
 from nltk.corpus import wordnet as wn
 from nltk.corpus import wordnet_ic
-import pickle
 brown_ic = wordnet_ic.ic('ic-brown.dat')
 import unitConversion as uc
 

@@ -1,9 +1,10 @@
 # Code to convert the list of entities into an output file
 
-def main(sets, index,answ,fn):
+
+def main(sets, index, answ, fn):
     entities = [x[1] for x in sets if x[1].num != 'x']
     entities += [x[1] for x in sets if x[1].num == 'x']
-    getOutputValues(entities, index,answ,fn)
+    getOutputValues(entities, index, answ, fn)
 
 # def getTempEntities():
 #     entities = []
@@ -12,7 +13,8 @@ def main(sets, index,answ,fn):
 #     entities.append(EntityTemp('seashell', '27'))
 #     return entities
 
-def getOutputValues(entities, index,answ,fn):
+
+def getOutputValues(entities, index, answ, fn):
     constants = []
     unknowns = []
     objtypes = []
@@ -31,9 +33,14 @@ def getOutputValues(entities, index,answ,fn):
             objtypes.append(ent)
         constantOrUnknownType.append(objtypes.index(ent))
 
-    printOutputValues(constants, unknowns, objtypes, constantOrUnknownType, index,answ,fn)
+    printOutputValues(
+        constants, unknowns, objtypes, constantOrUnknownType, index, answ, fn
+    )
 
-def printOutputValues(constants, unknowns, objtypes, constantOrUnkownType, index,answ,fn):
+
+def printOutputValues(
+        constants, unknowns, objtypes, constantOrUnkownType, index, answ, fn
+):
     file = open('data/'+fn+'ILP.input', 'a')
     file.write('\n'+str(index)+'\n')
     file.write('constants :')
@@ -48,6 +55,7 @@ def printOutputValues(constants, unknowns, objtypes, constantOrUnkownType, index
     file.write('\n' + 'n : ' + str((len(constants) * 2 + 1)))
     file.write('\nanswer : ' + str(answ))
     file.write('\n')
+
 
 def writeVals(file, values):
     for v in values:

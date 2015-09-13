@@ -1,31 +1,39 @@
 # import pickle
 # import entity
 
+
 def numclean(num):
-    if num in ['each','every','per','an','a','one']:return num
+    if num in ['each', 'every', 'per', 'an', 'a', 'one']:
+        return num
     else:
         try:
-            return float(''.join([x for x in num if x.isdigit() or x=='.']))
+            return float(''.join([x for x in num if x.isdigit() or x == '.']))
         except:
             pass
         #print(num)
+
+
 def main(sets):
     conversions = createConversions()
 
     #simple solution: targets are things that come after the x
-    xidx = [x[0] for x in sets if x[1].num=='x']
+    xidx = [x[0] for x in sets if x[1].num == 'x']
     if not xidx:
         return sets
-    
     xidx = xidx[0]
-    target = [x[1] for x in sets if x[0]>=xidx]
+    target = [x[1] for x in sets if x[0] >= xidx]
 
     for targ in target:
-        if targ.entity not in ['dollar','money','second','minute','hour']:continue
-        for idx,entity in sets:
-            if entity.num == 'x': continue
-            if entity.entity == targ.entity: continue
-            convertedVal = findConversion([numclean(entity.num), entity.entity], targ.entity, conversions)
+        if targ.entity not in ['dollar', 'money', 'second', 'minute', 'hour']:
+            continue
+        for idx, entity in sets:
+            if entity.num == 'x':
+                continue
+            if entity.entity == targ.entity:
+                continue
+            convertedVal = findConversion(
+                [numclean(entity.num), entity.entity], targ.entity, conversions
+            )
             if convertedVal is not None:
                 #print("CONVERTING")
                 #print(entity.entity,targ.entity)
@@ -34,20 +42,24 @@ def main(sets):
 
     return sets
 
+
 def findConversion(unit, target, conversions):
     for c in conversions.keys():
+        con_i = conversions[c][c.index(unit[1])]
+        con_t = conversions[c][c.index(target)]
 
         if (unit[1] in c) and (target in c):
-            if unit[0] in ['each','every','per','an','a','one']:
-                newVal = unit[0] + " " + str(conversions[c][c.index(unit[1])] / conversions[c][c.index(target)])
+            if unit[0] in ['each', 'every', 'per', 'an', 'a', 'one']:
+                newVal = unit[0] + " " + str(con_i / con_t)
             else:
                 try:
                     float(unit[0])
                 except:
                     return None
-                newVal = float(unit[0]) * conversions[c][c.index(unit[1])] / conversions[c][c.index(target)]
+                newVal = float(unit[0]) * con_i / con_t
             return newVal
     return None
+
 
 def createConversions():
     conversions = dict([])
@@ -69,8 +81,11 @@ def createConversions():
     '''
 
     # money
-    money = ('$','money','cent','penny', 'nickel', 'dime', 'quarter', 'half-dollar', 'dollar', 'five-dollar bills')
-    m = [100,100,1,1, 5, 10, 25, 50, 100, 500]
+    money = (
+        '$', 'money', 'cent', 'penny', 'nickel',
+        'dime', 'quarter', 'half-dollar', 'dollar', 'five-dollar bills'
+    )
+    m = [100, 100, 1, 1, 5, 10, 25, 50, 100, 500]
     conversions[money] = m
 
     # distance

@@ -3,20 +3,16 @@ import pickle
 
 import utils
 
-OUT=None
+OUT = None
 
 
-def make_eq(q,a,VERBOSE,TRAIN):
+def make_eq(q, a, VERBOSE, TRAIN):
     wps = q
-
-
-    
-
 
     for k in range(len(wps)):
         if VERBOSE:
             for i in range(len(wps)):
-                print(i,wps[i])
+                print(i, wps[i])
             k = int(input())
         print(k)
         #First preprocessing, tokenize slightly
@@ -24,17 +20,16 @@ def make_eq(q,a,VERBOSE,TRAIN):
         print(problem)
 
         story = utils.parse_stanford_nlp(problem)
-        pickle.dump(story,open("s_data/"+str(k)+".pickle",'wb'))
+        pickle.dump(story, open("s_data/" + str(k) + ".pickle", 'wb'))
         continue
 
 
-
-if __name__=="__main__":
+if __name__ == "__main__":
     #q, a = sys.argv[1:3]
     inp = sys.argv[1]
-    q,a,e = utils.parse_inp(inp)
-    VERBOSE=False
-    TRAIN=False
+    q, a, e = utils.parse_inp(inp)
+    VERBOSE = False
+    TRAIN = False
     '''
     if len(sys.argv)>3:
         if sys.argv[3]=='v':
@@ -43,6 +38,4 @@ if __name__=="__main__":
             TRAIN = True
             OUT = sys.argv[4]
     '''
-    make_eq(q,a,VERBOSE,TRAIN)
-
-
+    make_eq(q, a, VERBOSE, TRAIN)

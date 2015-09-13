@@ -19,7 +19,6 @@ def cleannum(n):
 
 
 def make_eq(q,a,VERBOSE,TRAIN):
-    bigtexamples = {x:([],[]) for x in ["+","*",'/','-','=']}
     wps = q
 
 

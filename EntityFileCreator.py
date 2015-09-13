@@ -5,12 +5,12 @@ def main(sets, index,answ,fn):
     entities += [x[1] for x in sets if x[1].num == 'x']
     getOutputValues(entities, index,answ,fn)
 
-def getTempEntities():
-    entities = []
-    entities.append(EntityTemp('seashell', '70'))
-    entities.append(EntityTemp('seashell', 'x'))
-    entities.append(EntityTemp('seashell', '27'))
-    return entities
+# def getTempEntities():
+#     entities = []
+#     entities.append(EntityTemp('seashell', '70'))
+#     entities.append(EntityTemp('seashell', 'x'))
+#     entities.append(EntityTemp('seashell', '27'))
+#     return entities
 
 def getOutputValues(entities, index,answ,fn):
     constants = []

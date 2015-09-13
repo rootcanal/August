@@ -1,18 +1,6 @@
 import sys
 
-
-def return_one(p, a, e, i):
-    s = """{
-"iIndex": %d,
-"sQuestion": "%s",
-"lEquations": [
-"%s"
-],
-"lSolutions": [
-%s
-]
-}""" % (i, p.strip(), e.strip(), a.strip())
-    return s
+import utils
 
 
 def floatcheck(x):
@@ -73,6 +61,6 @@ if __name__ == '__main__':
         e = str(ees[j])
         p = proc_frac(p)
         if j + 1 != len(q):
-            print(return_one(p, a, e, j + 1) + ',')
+            print(utils.return_one(p, a, e, j + 1) + ',')
         else:
-            print(return_one(p, a, e, j + 1) + "\n]")
+            print(utils.return_one(p, a, e, j + 1) + "\n]")

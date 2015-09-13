@@ -80,3 +80,17 @@ def preprocess_problem(problem):
     problem = ' '.join(problem)
     problem = " " + problem + " "
     return problem
+
+
+def return_one(p, a, e, i):
+    s = """{
+"iIndex": %d,
+"sQuestion": "%s",
+"lEquations": [
+"%s"
+],
+"lSolutions": [
+%s
+]
+}""" % (i, p.strip(), e.strip(), a.strip())
+    return s

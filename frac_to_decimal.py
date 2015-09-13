@@ -1,20 +1,6 @@
 import sys
 
 
-def return_one(p, a, e, i):
-    s = """{
-"iIndex": %d,
-"sQuestion": "%s",
-"lEquations": [
-"%s"
-],
-"lSolutions": [
-%s
-]
-}""" % (i, p.strip(), e.strip(), a.strip())
-    return s
-
-
 def floatcheck(x):
     try:
         x = ''.join([y for y in x if y != ','])

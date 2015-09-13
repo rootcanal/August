@@ -1,28 +1,14 @@
-import sys,os
+import sys
+import os
+
+import utils
 
 datadir = "data/"
 folds = [x for x in os.listdir(datadir) if x[0]=='i']
 test = [x for x in folds if str(sys.argv[1])+'.' in x][0]
 folds.remove(test)
 
-def parse_inp(inp):
-    q=[]
-    a=[]
-    e=[]
-    with open(inp) as f:
-        f = f.readlines()
-        i=0
-        while i<len(f):
-            q.append(f[i])
-            i+=1
-            e.append(f[i])
-            i+=1
-            a.append(f[i])
-            i+=1
-    return (q,a,e)
-
-
-q,a,e = parse_inp(sys.argv[2])
+q,a,e = utils.parse_inp(sys.argv[2])
 train = []
 for x in folds:
     train.extend(open(datadir+x).readlines())

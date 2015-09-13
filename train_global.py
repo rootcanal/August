@@ -1,12 +1,14 @@
 import sys
 import json
 import jsonrpclib
-#import makesets
+
+sys.path.insert(0, '/Users/rikka/libsvm-3.18/python')
+from svmutil import *
+
 import makesets 
 from train_local import get_k_eqs
 from train_local import read_parse
-sys.path.insert(0, '/Users/rikka/libsvm-3.18/python')
-from svmutil import *
+import utils
 
 
 
@@ -168,22 +170,6 @@ def make_eq(q,a,equations):
 
 
 
-def parse_inp(inp):
-    q=[]
-    a=[]
-    e=[]
-    with open(inp) as f:
-        f = f.readlines()
-        i=0
-        while i<len(f):
-            q.append(f[i])
-            i+=1
-            e.append(f[i])
-            i+=1
-            a.append(f[i])
-            i+=1
-    return (q,a,e)
-
 
 
 if __name__=="__main__":
@@ -191,7 +177,7 @@ if __name__=="__main__":
     inp = sys.argv[1]
     multi = svm_load_model(sys.argv[2])
     makesets.FOLD = sys.argv[1][-1]
-    q,a,e = parse_inp(inp)
+    q,a,e = utils.parse_inp(inp)
     make_eq(q,a,e)
 
 

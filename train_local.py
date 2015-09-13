@@ -4,6 +4,8 @@ import jsonrpclib
 import makesets
 import pickle
 
+import utils
+
 def read_parse(k):
     return pickle.load(open('s_data/'+str(k)+'.pickle', 'rb'))
 
@@ -125,22 +127,6 @@ def make_eq(q,a,equations):
 
 
 
-def parse_inp(inp):
-    q=[]
-    a=[]
-    e=[]
-    with open(inp) as f:
-        f = f.readlines()
-        i=0
-        while i<len(f):
-            q.append(f[i])
-            i+=1
-            e.append(f[i])
-            i+=1
-            a.append(f[i])
-            i+=1
-    return (q,a,e)
-
 def get_k_eqs(i,k=100,g=False,a=False):
     digit = "{0:0=3d}".format(int(i))
     exprs = []
@@ -181,7 +167,7 @@ if __name__=="__main__":
     inp = sys.argv[1]
     #eqsdir = sys.argv[2]
     makesets.FOLD = sys.argv[1][-1]
-    q,a,e = parse_inp(inp)
+    q,a,e = utils.parse_inp(inp)
 
     make_eq(q,a,e)
 

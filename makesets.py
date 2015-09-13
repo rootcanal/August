@@ -1,10 +1,13 @@
 import sys
 import json
 import jsonrpclib
+
 from nltk.corpus import wordnet as wn
 from nltk.corpus import wordnet_ic
 brown_ic = wordnet_ic.ic('ic-brown.dat')
 import unitConversion as uc
+
+import utils
 
 FOLD = None
 NAMES = [x.strip() for x in open("names.txt").readlines()]
@@ -948,26 +951,10 @@ def bug():
         else:
             exec(inp)
 
-def parse_inp(inp):
-    q=[]
-    a=[]
-    e=[]
-    with open(inp) as f:
-        f = f.readlines()
-        i=0
-        while i<len(f):
-            q.append(f[i])
-            i+=1
-            e.append(f[i])
-            i+=1
-            a.append(f[i])
-            i+=1
-    return (q,a,e)
-
 
 if __name__ == "__main__":
     nlp = StanfordNLP()
-    q,a,e = parse_inp(sys.argv[1])
+    q,a,e = utils.parse_inp(sys.argv[1])
     wps = q
     while True:
         for i in range(len(q)):

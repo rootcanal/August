@@ -3,6 +3,8 @@ import json
 import jsonrpclib
 import pickle
 
+import utils
+
 OUT=None
 
 class StanfordNLP:
@@ -46,28 +48,12 @@ def make_eq(q,a,VERBOSE,TRAIN):
         pickle.dump(story,open("s_data/"+str(k)+".pickle",'wb'))
         continue
 
-def parse_inp(inp):
-    q=[]
-    a=[]
-    e=[]
-    with open(inp) as f:
-        f = f.readlines()
-        i=0
-        while i<len(f):
-            q.append(f[i])
-            i+=1
-            e.append(f[i])
-            i+=1
-            a.append(f[i])
-            i+=1
-    return (q,a,e)
-
 
 
 if __name__=="__main__":
     #q, a = sys.argv[1:3]
     inp = sys.argv[1]
-    q,a,e = parse_inp(inp)
+    q,a,e = utils.parse_inp(inp)
     VERBOSE=False
     TRAIN=False
     '''

@@ -1,24 +1,10 @@
 import sys
-import json
-import jsonrpclib
 import makesets
 import EntityFileCreator as EF
 
 import utils
 
 OUT=None
-
-class StanfordNLP:
-    def __init__(self, port_number=8080):
-        self.server = jsonrpclib.Server("http://localhost:%d" % port_number)
-
-    def parse(self, text):
-        return json.loads(self.server.parse(text))
-
-nlp = StanfordNLP()
-
-def cleannum(n):
-    return ''.join([x for x in n if x.isdigit() or x=='.' or x=='x' or x=='x*'])
 
 
 def make_eq(q,a,VERBOSE,TRAIN):
@@ -37,18 +23,11 @@ def make_eq(q,a,VERBOSE,TRAIN):
                 print(i,wps[i])
             k = int(input())
         print(k)
-        problem = wps[k]
         #First preprocessing, tokenize slightly
-        problem = problem.strip().split(" ")
-        for i,x in enumerate(problem):
-            if len(x)==0:continue
-            if x[-1] in [',','.','?']:
-                problem[i] = x[:-1]+" "+x[-1]
-        problem = ' '.join(problem)
-        problem = " " + problem + " "
+        problem = utils.preprocess_problem(wps[k])
         print(problem)
 
-        story = nlp.parse(problem)
+        story = utils.parse_stanford_nlp(problem)
         sets = makesets.makesets(story['sentences'])
         EF.main(sets,k,a[k],sys.argv[1])
         sets = [x for x in sets if makesets.floatcheck(x[1].num) or x[1].num == 'x']

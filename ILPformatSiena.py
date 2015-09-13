@@ -7,9 +7,6 @@ import utils
 
 OUT=None
 
-def cleannum(n):
-    return ''.join([x for x in n if x.isdigit() or x=='.' or x=='x' or x=='x*'])
-
 
 def make_eq(q,a,VERBOSE,TRAIN):
     #wps = open(q).readlines()
@@ -23,15 +20,8 @@ def make_eq(q,a,VERBOSE,TRAIN):
                 print(i,wps[i])
             k = int(input())
         print(k)
-        problem = wps[k]
         #First preprocessing, tokenize slightly
-        problem = problem.strip().split(" ")
-        for i,x in enumerate(problem):
-            if len(x)==0:continue
-            if x[-1] in [',','.','?']:
-                problem[i] = x[:-1]+" "+x[-1]
-        problem = ' '.join(problem)
-        problem = " " + problem + " "
+        problem = utils.preprocess_problem(wps[k])
         print(problem)
 
         story = read_parse(k)

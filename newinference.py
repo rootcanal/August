@@ -1,26 +1,12 @@
 import sys
-import json
-import jsonrpclib
-import makesets
-from train_local import get_k_eqs
-from train_local import read_parse
-from train_local import parse_inp
+
 sys.path.insert(0, '/Users/rikka/libsvm-3.18/python')
-from svmutil import *
+import svmutils
+
+import makesets
+import utils
 
 
-class StanfordNLP:
-    def __init__(self, port_number=8080):
-        self.server = jsonrpclib.Server("http://localhost:%d" % port_number)
-
-    def parse(self, text):
-        return json.loads(self.server.parse(text))
-
-nlp = StanfordNLP()
-
-def cleannum(n):
-    n = ''.join([x for x in n if x.isdigit() or x=='.' or x=='x' or x=='x*'])
-    return n
 multi = None
 glob = None
 
@@ -30,7 +16,7 @@ def make_eq(q,a,equations):
     wrong = 0
 
     for k in range(len(wps)):
-        answers = get_k_eqs(equations[k],g=True,a=True)
+        answers = utils.get_k_eqs(equations[k],g=True,a=True)
         if answers == []: continue
         seeneq = []
         seen = []
@@ -44,20 +30,13 @@ def make_eq(q,a,equations):
 
 
         #First preprocessing, tokenize slightly
-        problem = wps[k]#.lower()
-        problem = problem.strip().split(" ")
-        for i,x in enumerate(problem):
-            if len(x)==0:continue
-            if x[-1] in [',','.','?']:
-                problem[i] = x[:-1]+" "+x[-1]
-        problem = ' '.join(problem)
-        problem = " " + problem + " "
+        problem = utils.preprocess_problem(wps[k])
         print(problem)
 
 
         #make story
         #story = nlp.parse(problem)
-        story = read_parse(int(equations[k]))
+        story = utils.read_parse(int(equations[k]))
         sets = makesets.makesets(story['sentences'])
         i = 0
 
@@ -74,7 +53,7 @@ def make_eq(q,a,equations):
         xidx = xidx[0]
 
 
-        numlist = [(cleannum(v.num),v) for k,v in sets]
+        numlist = [(utils.cleannum(v.num),v) for k,v in sets]
         numlist = [x for x in numlist if x[0]!='']
         objs = {k:(0,v) for k,v in numlist}
         print(objs.items())
@@ -156,10 +135,10 @@ def compute(p,op,e,target,problem,story,order,score=None,cons=None):
     if op == '=':
         vec = [order,score,cons]
         vec.extend(makesets.vector(p,e,problem,story,target))
-        op_label, op_acc, op_val = svm_predict([-1], [vec], glob ,'-q -b 1')
+        op_label, op_acc, op_val = svmutils.svm_predict([-1], [vec], glob ,'-q -b 1')
     else:
         vec = makesets.vector(p,e,problem,story,target)
-        op_label, op_acc, op_val = svm_predict([-1], [vec], multi ,'-q -b 1')
+        op_label, op_acc, op_val = svmutils.svm_predict([-1], [vec], multi ,'-q -b 1')
 
     op_val=op_val[0]
     if op == '+':
@@ -180,13 +159,12 @@ def compute(p,op,e,target,problem,story,order,score=None,cons=None):
 
 if __name__=="__main__":
     inp, mfile, gfile = sys.argv[1:4]
-    q,a,e = parse_inp(inp)
-    multi = svm_load_model(mfile)
-    glob = svm_load_model(gfile)
+    multi = svmutils.svm_load_model(mfile)
+    glob = svmutils.svm_load_model(gfile)
     #q, a = sys.argv[1:3]
     inp = sys.argv[1]
     makesets.FOLD = sys.argv[1][-1]
-    q,a,e = parse_inp(inp)
+    q,a,e = utils.parse_inp(inp)
     right, wrong = make_eq(q,a,e)
     print(right,wrong,right/len(q))
 

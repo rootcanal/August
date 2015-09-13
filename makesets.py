@@ -1,6 +1,4 @@
 import sys
-import json
-import jsonrpclib
 
 from nltk.corpus import wordnet as wn
 from nltk.corpus import wordnet_ic
@@ -934,13 +932,6 @@ def makesets(story):
 
     return sets
 
-class StanfordNLP:
-    def __init__(self, port_number=8080):
-        self.server = jsonrpclib.Server("http://localhost:%d" % port_number)
-
-    def parse(self, text):
-        return json.loads(self.server.parse(text))
-
 def bug():
     print("bug")
     ip = 0
@@ -953,7 +944,6 @@ def bug():
 
 
 if __name__ == "__main__":
-    nlp = StanfordNLP()
     q,a,e = utils.parse_inp(sys.argv[1])
     wps = q
     while True:
@@ -963,7 +953,7 @@ if __name__ == "__main__":
         k=int(k)
         problem = wps[k].lower()
         print(problem)
-        story = nlp.parse(problem)
+        story = utils.parse_stanford_nlp(problem)
         sets = makesets(story["sentences"])
         for s in sets: s[1].details()
         input()

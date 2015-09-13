@@ -1,26 +1,10 @@
 import sys
-import json
-import jsonrpclib
 import makesets
 import pickle
 
 import utils
 
-def read_parse(k):
-    return pickle.load(open('s_data/'+str(k)+'.pickle', 'rb'))
 
-class StanfordNLP:
-    def __init__(self, port_number=8080):
-        self.server = jsonrpclib.Server("http://localhost:%d" % port_number)
-
-    def parse(self, text):
-        return json.loads(self.server.parse(text))
-
-#nlp = StanfordNLP()
-
-def cleannum(n):
-    n = ''.join([x for x in n if x.isdigit() or x=='.' or x=='x' or x=='x*'])
-    return n
 
 def kill(signum, frame):
     raise Exception("end of time")
@@ -46,20 +30,13 @@ def make_eq(q,a,equations):
     for k in range(len(wps)):
 
         #First preprocessing, tokenize slightly
-        problem = wps[k]#.lower()
-        problem = problem.strip().split(" ")
-        for i,x in enumerate(problem):
-            if len(x)==0:continue
-            if x[-1] in [',','.','?']:
-                problem[i] = x[:-1]+" "+x[-1]
-        problem = ' '.join(problem)
-        problem = " " + problem + " "
+        problem = utils.preprocess_problem(wps[k])
         print(k)
         print(problem)
 
         #story = nlp.parse(problem)
-        story = read_parse(int(equations[k]))
-        eqs = get_k_eqs(equations[k])
+        story = utils.read_parse(int(equations[k]))
+        eqs = utils.get_k_eqs(equations[k])
         answers = [x[1] for x in eqs if x[0]==1]
         if answers == []: continue
         answers = list(set(answers))
@@ -77,7 +54,7 @@ def make_eq(q,a,equations):
             print("NO X WHY");continue
 
 
-        numlist = [(cleannum(v.num),v) for k,v in sets]
+        numlist = [(utils.cleannum(v.num),v) for k,v in sets]
         numlist = [x for x in numlist if x[0]!='']
         objs = {k:(0,v) for k,v in numlist}
         print(objs.items())
@@ -126,38 +103,6 @@ def make_eq(q,a,equations):
     pickle.dump(bigtexamples,open('data/'+sys.argv[1][-1]+".local.training",'wb'))
 
 
-
-def get_k_eqs(i,k=100,g=False,a=False):
-    digit = "{0:0=3d}".format(int(i))
-    exprs = []
-    with open(eqsdir+"/q"+digit+".txt.out") as f:
-        f = f.readlines()[3:-1]
-        j = 0
-        while j<k:
-            if j>=len(f): break
-            line = f[j]
-            line = line.split(" | ")
-            good = line[0].split(": ")[1]
-            exp = line[6]
-            for s in ['(',')','+','-','*','/','=']:
-                exp = exp.replace(s,' '+s+' ')
-            exp = exp.replace('  ',' ').strip()
-            if g:
-                cons = int(line[3])
-                if cons == 0:
-                    cons = 1
-                else:
-                    cons = 1/(cons+1)
-                if a:
-                    answ = line[5]
-                    exprs.append((int(good),exp,cons,answ))
-                else:
-                    exprs.append((int(good),exp,cons))
-
-            else:
-                exprs.append((int(good),exp))
-            j+=1
-    return exprs
 
 eqsdir = "ILP.out"
 

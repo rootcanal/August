@@ -1,13 +1,9 @@
 import sys
-import json
-import jsonrpclib
 
 sys.path.insert(0, '/Users/rikka/libsvm-3.18/python')
-from svmutil import *
+import svmutil
 
 import makesets 
-from train_local import get_k_eqs
-from train_local import read_parse
 import utils
 
 
@@ -15,7 +11,7 @@ import utils
 multi=None
 def compute(p,op,e,target,problem,story,order):
     vec = makesets.vector(p,e,problem,story,target)
-    op_label, op_acc, op_val = svm_predict([-1], [vec], multi ,'-q -b 1')
+    op_label, op_acc, op_val = svmutil.svm_predict([-1], [vec], multi ,'-q -b 1')
 
     op_val=op_val[0]
     if op == '+':
@@ -32,20 +28,6 @@ def compute(p,op,e,target,problem,story,order):
 
     c = makesets.combine(p[1],e[1],op)
     return (val,c,op_val)
-
-
-class StanfordNLP:
-    def __init__(self, port_number=8080):
-        self.server = jsonrpclib.Server("http://localhost:%d" % port_number)
-
-    def parse(self, text):
-        return json.loads(self.server.parse(text))
-
-nlp = StanfordNLP()
-
-def cleannum(n):
-    n = ''.join([x for x in n if x.isdigit() or x=='.' or x=='x' or x=='x*'])
-    return n
 
 def kill(signum, frame):
     raise Exception("end of time")
@@ -67,7 +49,7 @@ def make_eq(q,a,equations):
 
     for k in range(len(wps)):
         print(k,equations[k])
-        answers = get_k_eqs(equations[k],g=True)
+        answers = utils.get_k_eqs(equations[k],g=True)
         good = list(set([x for x in answers if x[0]==1]))
         bad = list(set([x for x in answers if x[0]==0]))[:len(good)]
         '''
@@ -80,19 +62,12 @@ def make_eq(q,a,equations):
 
 
         #First preprocessing, tokenize slightly
-        problem = wps[k]#.lower()
-        problem = problem.strip().split(" ")
-        for i,x in enumerate(problem):
-            if len(x)==0:continue
-            if x[-1] in [',','.','?']:
-                problem[i] = x[:-1]+" "+x[-1]
-        problem = ' '.join(problem)
-        problem = " " + problem + " "
+        problem = utils.preprocess_problem(wps[k])
         print(problem)
 
         #make story
         #story = nlp.parse(problem)
-        story = read_parse(int(equations[k]))
+        story = utils.read_parse(int(equations[k]))
         sets = makesets.makesets(story['sentences'])
         i = 0
 
@@ -104,7 +79,7 @@ def make_eq(q,a,equations):
         xidx = xidx[0]
 
 
-        numlist = [(cleannum(v.num),v) for k,v in sets]
+        numlist = [(utils.cleannum(v.num),v) for k,v in sets]
         numlist = [x for x in numlist if x[0]!='']
         objs = {k:(0,v) for k,v in numlist}
         #print(numlist)
@@ -175,7 +150,7 @@ def make_eq(q,a,equations):
 if __name__=="__main__":
     #q, a = sys.argv[1:3]
     inp = sys.argv[1]
-    multi = svm_load_model(sys.argv[2])
+    multi = svmutil.svm_load_model(sys.argv[2])
     makesets.FOLD = sys.argv[1][-1]
     q,a,e = utils.parse_inp(inp)
     make_eq(q,a,e)
